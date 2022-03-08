@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Makaan - Real Estate HTML Template</title>
+    <title>{% block title %}ENI Sortie{% endblock %}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -32,6 +33,9 @@
 </head>
 
 <body>
+{% block main %}
+
+    {% block spinner %}
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -40,7 +44,9 @@
             </div>
         </div>
         <!-- Spinner End -->
+    {% endblock spinner %}
 
+    {% block navbar %}
         <!-- Navbar Start a modifier -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
@@ -79,7 +85,9 @@
             </nav>
         </div>
         <!-- Navbar End -->
+        {% endblock navbar %}
 
+        {% block header %}
         <!-- Header Start a modifier -->
         <div class="container-fluid header bg-white p-0">
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
@@ -102,7 +110,9 @@
             </div>
         </div>
         <!-- Header End -->
+        {% endblock header %}
 
+        {% block search %}
         <!-- Search Start a modifier -->
         <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
             <div class="container">
@@ -137,7 +147,9 @@
             </div>
         </div>
         <!-- Search End -->
+        {% endblock search %}
 
+        {% block category %}
         <!-- Category Start a modifier -->
         <div class="container-xxl py-5">
             <div class="container">
@@ -238,7 +250,9 @@
             </div>
         </div>
         <!-- Category End -->
+        {% endblock category %}
 
+        {% block activityList %}
         <!-- Property List Start a modifier -->
         <div class="container-xxl py-5">
             <div class="container">
@@ -631,7 +645,9 @@
             </div>
         </div>
         <!-- Property List End -->
+        {% endblock activityList %}
 
+        {% block team %}
         <!-- Team Start a modifier avec nos tronches -->
         <div class="container-xxl py-5">
             <div class="container">
@@ -708,7 +724,9 @@
             </div>
         </div>
         <!-- Team End -->   
-
+        {% endblock team %}
+        
+        {% block footer %}
         <!-- Footer Start a modifier-->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
@@ -788,6 +806,7 @@
             </div>
         </div>
         <!-- Footer End -->
+        {% endblock footer %}
 
         <!-- Back to Top interessant -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -803,6 +822,9 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+   
 </body>
+{% endblock %}
 
 </html>
