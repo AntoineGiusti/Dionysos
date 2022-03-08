@@ -30,7 +30,7 @@ class Activity
     private $startDate;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="integer")
      */
     private $activityDuration;
 
@@ -113,12 +113,12 @@ class Activity
         return $this;
     }
 
-    public function getActivityDuration(): ?\DateTimeInterface
+    public function getActivityDuration(): ?int
     {
         return $this->activityDuration;
     }
 
-    public function setActivityDuration(\DateTimeInterface $activityDuration): self
+    public function setActivityDuration(?int $activityDuration): self
     {
         $this->activityDuration = $activityDuration;
 
