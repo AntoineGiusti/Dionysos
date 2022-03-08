@@ -25,7 +25,7 @@ class Town
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=10)
      */
     private $postalCode;
 
