@@ -17,4 +17,14 @@ class PrincipalController extends AbstractController
              'titre' => 'home page',
         ]);
     }
+
+     /**
+     * @Route("/research", name="research")
+     */
+    public function research(): Response
+    {
+        return $this->render('principal/research.html.twig',  [
+             'titre' => 'research page',
+        ]);
+    }
 }

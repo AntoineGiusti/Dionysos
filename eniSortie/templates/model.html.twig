@@ -54,21 +54,33 @@
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
-                    <h1 class="m-0 text-primary">Makaan</h1>
+                    <h1 class="m-0 text-primary">ENI Sortie</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="home.html" class="nav-item nav-link active">Accueil</a>
+                        {# <a href="about.html" class="nav-item nav-link">About</a> #}
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Campus</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item">Property List</a>
-                                <a href="property-type.html" class="dropdown-item">Property Type</a>
-                                <a href="property-agent.html" class="dropdown-item">Property Agent</a>
+                                <a href="property-list.html" class="dropdown-item">Rennes</a>
+                                <a href="property-list.html" class="dropdown-item">Saint Herblain</a>
+                                <a href="property-list.html" class="dropdown-item">Niort</a>
+                                <a href="property-list.html" class="dropdown-item">Niort</a>
+                                <a href="property-list.html" class="dropdown-item">Niort</a>
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Ville</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="ville-list.html" class="dropdown-item">Rennes</a>
+                                <a href="ville-list.html" class="dropdown-item">Saint Herblain</a>
+                                <a href="ville-list.html" class="dropdown-item">Niort</a>
+                                <a href="ville-list.html" class="dropdown-item">Niort</a>
+                                <a href="ville-list.html" class="dropdown-item">Niort</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
@@ -87,23 +99,22 @@
         <!-- Navbar End -->
         {% endblock navbar %}
 
-        {% block header %}
+         {% block header %}
         <!-- Header Start a modifier -->
         <div class="container-fluid header bg-white p-0">
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">Find A <span class="text-primary">Perfect Home</span> To Live With Your Family</h1>
+                    <h1 class="display-5 animated fadeIn mb-4">Appli<span class="text-primary">ENI Sortie</span> Les sorties du BDE</h1>
                     <p class="animated fadeIn mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
-                        sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                    <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Get Started</a>
+                        sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>                    
                 </div>
                 <div class="col-md-6 animated fadeIn">
                     <div class="owl-carousel header-carousel">
                         <div class="owl-carousel-item">
-                            <img class="img-fluid" src="img/carousel-1.jpg" alt="">
+                            <img class="img-fluid" src="img/concert.jpg" alt="">
                         </div>
                         <div class="owl-carousel-item">
-                            <img class="img-fluid" src="img/carousel-2.jpg" alt="">
+                            <img class="img-fluid" src="img/bowling.jpg" alt="">
                         </div>
                     </div>
                 </div>
