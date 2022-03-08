@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ActivityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,10 +49,40 @@ class Activity
      */
     private $activityDescription;
 
+
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="activity")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $location;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="activity")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="activity")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="activity")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organizer;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="activities")
+     */
+    private $participant;
+
+    public function __construct()
+    {
+        $this->participant = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -129,14 +161,76 @@ class Activity
         return $this;
     }
 
-    public function getStatus(): ?int
+    
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(?Status $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getOrganizer(): ?Participant
+    {
+        return $this->organizer;
+    }
+
+    public function setOrganizer(?Participant $organizer): self
+    {
+        $this->organizer = $organizer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participant>
+     */
+    public function getParticipant(): Collection
+    {
+        return $this->participant;
+    }
+
+    public function addParticipant(Participant $participant): self
+    {
+        if (!$this->participant->contains($participant)) {
+            $this->participant[] = $participant;
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        $this->participant->removeElement($participant);
 
         return $this;
     }
