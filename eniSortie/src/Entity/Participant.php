@@ -46,7 +46,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $phoneNumber;
 
