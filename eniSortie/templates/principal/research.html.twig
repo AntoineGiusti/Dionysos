@@ -55,13 +55,13 @@
                                 <a href="ville-list.html" class="dropdown-item">Niort</a>
                             </div>
                         </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                            </div>
-                        </div>
+                        {# <div class="nav-item dropdown"> #}
+                            {# <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a> #}
+                            {# <div class="dropdown-menu rounded-0 m-0"> #}
+                                {# <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="404.html" class="dropdown-item">404 Error</a> #}
+                            {# </div> #}
+                        {# </div> #}
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
@@ -73,7 +73,7 @@
 
          {% block header %}
         <!-- Header Start a modifier -->
-        <div class="container-fluid header bg-white p-0">
+        <div class="container-fluid header bg-white p-5">
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
                     <h1 class="display-5 animated fadeIn mb-4"><span class="text-primary">ENI Sortie</span> Les sorties du BDE</h1>
@@ -99,10 +99,38 @@
         <!-- Search Start a modifier -->
         <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
             <div class="container">
+             {# <div class="col md-4">
+                                <checkbox>Sortie dont je suis l'organisateur / trice</checkbox><br>
+                                <checkbox>Sortie auxquelles je suis inscrit / e</checkbox><br>
+                                <checkbox>Sorties auxquelles je ne suis pas inscrit / e</checkbox><br>
+                                <checkbox>Sorties passées</checkbox><br>
+                            </div> #}
+            <div class="mb-5">
+                <div class="form-check form-switch">
+                     <input class="form-check-input btn-dark " type="checkbox" id="flexSwitchCheckDefault">
+                     <label class="form-check-label text-dark" for="flexSwitchCheckDefault">Sortie dont je suis l'organisateur / trice</label>
+                </div>            
+                <div class="form-check form-switch">
+                     <input class="form-check-input btn-dark" type="checkbox" id="flexSwitchCheckDefault">
+                     <label class="form-check-label text-dark" for="flexSwitchCheckDefault">Sortie auxquelles je suis inscrit / e</label>
+                </div>            
+                <div class="form-check form-switch">
+                     <input class="form-check-input btn-dark" type="checkbox" id="flexSwitchCheckDefault">
+                     <label class="form-check-label text-dark" for="flexSwitchCheckDefault">Sorties auxquelles je ne suis pas inscrit / e</label>
+                </div>            
+                <div class="form-check form-switch">
+                     <input class="form-check-input btn-dark" type="checkbox" id="flexSwitchCheckDefault">
+                     <label class="form-check-label text-dark" for="flexSwitchCheckDefault">Sorties passées</label>
+                </div>  
+            </div>          
                 <div class="row g-2">
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-4">
+                            <form action="post">
+
+                           
+
                                 <input type="text" class="form-control border-0 py-3" placeholder="Rechercher">
                             </div>
                             <div class="col-md-4">
@@ -128,14 +156,42 @@
                             </div>
                         </div>
                     </div>
+
+                    
+
                     <div class="col-md-2">
                         <button class="btn btn-dark border-0 w-100 py-3">Rechercher</button>
+
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
+
         <!-- Search End -->
         {% endblock search %}
+
+        <!-- partie affichage liste d'activitees -->
+
+        <div class="container" >
+            <table class="table table-striped">
+                <thead>
+                    <tbody>
+                        <td>
+                            <th>Nom de la sortie</th>
+                            <th>Date de la sortie</th>
+                            <th>Cloture</th>
+                            <th>Inscrit/Place</th>
+                            <th>Etat</th>
+                            <th>Inscrit</th>
+                            <th>Crganisateur</th>
+                            <th>Action</th>
+                        </td>
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+
 
          {% block footer %}
         <!-- Footer Start a modifier-->
