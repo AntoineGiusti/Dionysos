@@ -55,16 +55,16 @@
                                 <a href="ville-list.html" class="dropdown-item">Niort</a>
                             </div>
                         </div>
-                        {# <div class="nav-item dropdown"> #}
-                            {# <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a> #}
-                            {# <div class="dropdown-menu rounded-0 m-0"> #}
-                                {# <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a> #}
-                            {# </div> #}
-                        {# </div> #}
+                        {# <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="404.html" class="dropdown-item">404 Error</a>
+                            </div>
+                        </div> #}
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Ajouter activité</a>
                 </div>
             </nav>
         </div>
@@ -73,25 +73,28 @@
 
          {% block header %}
         <!-- Header Start a modifier -->
-        <div class="container-fluid header bg-white p-5">
+       <div class="container-fluid header bg-white p-0">
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4"><span class="text-primary">ENI Sortie</span> Les sorties du BDE</h1>
-                    <p class="animated fadeIn mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
-                        sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>                    
+                    <h1 class="display-5 animated fadeIn mb-4">Appli <span class="text-primary">ENI Sortie</span> Les sorties du BDE</h1>
+                    <p class="animated fadeIn mb-4 pb-2">Le bureau des etudiants de l'ENI vous propose des sorties au plus pres de ses campus</p>                    
                 </div>
                 <div class="col-md-6 animated fadeIn">
-                    <div class="owl-carousel header-carousel">
-                        <div class="owl-carousel-item">
-                            <img class="img-fluid" src="./public/img/concert.jpg" alt="">
-                        </div>
-                        <div class="owl-carousel-item">
-                            <img class="img-fluid" src="./public/img/bowling.jpg" alt="">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="img/escalade.jpg" class="d-block w-100" alt="">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/concert1.jpg" class="d-block w-100" alt="">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/bowling1" class="d-block w-100" alt="...">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                    
         <!-- Header End -->
         {% endblock header %}
 
