@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'model.html.twig' %}
 
 {% block title %}Update Participant{% endblock %}
 
 {% block main %}
 {{ form_start(formulaire)}}
 {{ form_widget(formulaire)}}
-<button class="btn btn-info" type="submit">Modifier</button>
+{#<button class="btn btn-info" type="submit">Modifier</button>#}
 {{ form_end(formulaire)}}
 {% endblock %}
