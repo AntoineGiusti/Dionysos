@@ -43,6 +43,13 @@
             </div>
             <h1 class="m-0 text-primary">ENI Sortie</h1>
         </a>
+        <!--Message personnalisé à l'utilisateur quand il est co'-->
+        {% if app.user %}
+            <div>
+                <h4>Bonjour {{ app.user.firstname }}</h4>
+            </div>
+        {% endif %}
+        <!-- Fin du message personnalisé-->
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -59,6 +66,10 @@
                         <a href="property-list.html" class="dropdown-item">Niort</a>
                         <a href="property-list.html" class="dropdown-item">Niort</a>
                     </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 509b25c8798a04f517734fee7f926d4561bb8925
                 </div>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Ville</a>
@@ -80,6 +91,12 @@
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
             <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Ajouter activité</a>
+
+            {% if app.user %}
+                    <a href="{{ path('app_logout') }}" class="btn btn-secondary px-3 mx-3 d-none d-lg-flex" >Déconnexion</a>
+            {% endif %}
+
+
         </div>
     </nav>
 </div>

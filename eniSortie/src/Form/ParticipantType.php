@@ -13,14 +13,14 @@ class ParticipantType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
+           // ->add('roles') roles à definir plus tard, fait planter le formulaire pour le moment
             ->add('password')
             ->add('lastname')
             ->add('firstname')
             ->add('phoneNumber')
             ->add('isActive')
-            ->add('campus')
-            ->add('activities')
+            ->add('campus',null, ['choice_label'=>'name'])
+            ->add('activities',null, ['choice_label'=>'name'])
         ;
     }
 
