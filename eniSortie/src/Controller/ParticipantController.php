@@ -37,7 +37,7 @@ class ParticipantController extends AbstractController
     {
         $participant = $repo->findAll();
         return $this->render('participant/participantList.html.twig', [
-            'participant' => $participant,
+            'participants' => $participant,
         ]);
     }
 
