@@ -11,23 +11,15 @@ class SecurityController extends AbstractController
 {
 
 
-    // /**
-    //  * @Route("/home", name="app_login")
-    //  */
-    // public function home(): Response
-    // {
-    //     return $this->render('principal/home.html.twig',  [
-    //          'titre' => 'home page',
-    //     ]);
-    // }
+    
     /**
      * @Route("/login", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        //  if ($this->getUser()) {
-        //      return $this->redirectToRoute('research.html.twig');
-        //  }
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('home');
+        // }
                
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

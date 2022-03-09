@@ -23,6 +23,7 @@ class PrincipalController extends AbstractController
      */
     public function research(): Response
     {
+        
         return $this->render('principal/research.html.twig',  [
              'titre' => 'research page',
         ]);
