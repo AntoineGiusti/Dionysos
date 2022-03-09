@@ -8,18 +8,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PrincipalController extends AbstractController
 {
-    /**
-     * @Route("/", name="home")
-     */
-    public function home(): Response
-    {
-        return $this->render('principal/home.html.twig',  [
-             'titre' => 'home page',
-        ]);
-    }
+    // /**
+    //  * @Route("/", name="home")
+    //  */
+    // public function home(): Response
+    // {
+    //     return $this->render('Security/home.html.twig',  [
+    //          'titre' => 'home page',
+    //     ]);
+    // }
 
      /**
-     * @Route("/research", name="research")
+     * @Route("/", name="home")
      */
     public function research(): Response
     {

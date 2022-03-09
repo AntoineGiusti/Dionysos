@@ -14,18 +14,28 @@
         <div class="card border-0 shadow rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
             <h5 class="card-title text-center mb-5 fw-light fs-5">Identifiez-vous</h5>
-            <form>
+            <form method="POST">
+              {% if error %}
+                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+             {% endif %}
+
+             {% if app.user %}
+                <div class="mb-3">
+                 You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+              {% endif %}
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input type="email" name="email" value="{{ last_username }}" class="form-control" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Mot de passe</label>
               </div>
 
               <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                <input class="form-check-input" name="_remember_me" type="checkbox" value="" id="rememberPasswordCheck">
+                 https://symfony.com/doc/current/security/remember_me.html
                 <label class="form-check-label" for="rememberPasswordCheck">
                   se souvenir de moi
                 </label>
@@ -35,6 +45,8 @@
               <div class="d-grid">
                 <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">S'identifier</button>
               </div>
+              <input type="hidden" name="_csrf_token"
+              value="{{ csrf_token('authenticate') }}">
               {# <hr class="my-4"> #}
               {# <div class="d-grid mb-2">
                 <button class="btn btn-google btn-login text-uppercase fw-bold" type="submit">
