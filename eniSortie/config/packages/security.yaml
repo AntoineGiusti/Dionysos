@@ -11,13 +11,14 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
+                # the class of the entity that represents users
                 class: App\Entity\Participant
+                # the property to query by - e.g. email, username, etc
                 property: email
     firewalls:
-        # dev:
-        #     pattern: ^/(_(profiler|wdt)|css|images|js)/
-        #     security: false
-
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
         main:
             lazy: true
             provider: app_user_provider
@@ -38,10 +39,15 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/profile, roles: ROLE_USER }        
+         - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 when@test:
     security:
+        # test suite à  https://symfonycasts.com/screencast/symfony-security/auth-errors
+        hide_user_not_found: false
+        #This tells Symfony to not convert UserNotFoundException to a BadCredentialsException.
+
         password_hashers:
             # By default, password hashers are resource intensive and take time. This is
             # important to generate secure password hashes. In tests however, secure hashes

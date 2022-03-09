@@ -12,10 +12,19 @@ use App\Entity\Status;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
-
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+//AJOUT ROXANE POUR HASHER LES MDP//////////////////////////////////////////////
+    private UserPasswordHasherInterface $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+////////////////////////////////////////////////////////////////////////////////
+
     public function load(ObjectManager $manager): void
     {
 
@@ -50,7 +59,16 @@ class AppFixtures extends Fixture
             $participants[$i]->setFirstName($faker->firstName);
             //Modification de la BDD pour avoir des numéros >10 car le faker propose des num>10
             $participants[$i]->setPhoneNumber($faker->phoneNumber);
-            $participants[$i]->setPassword($faker->password);
+
+            //WRONG !!!! IL FAUT HASHER LES MDP AVANT
+            //VOIR PLUS HAUT private UserPasswordHasherInterface $hasher;
+            // $participants[$i]->setPassword($faker->password);
+            //  $participants[$i]->setPassword('mdp');
+
+            $password = $this->hasher->hashPassword($participants[$i], 'pass_1234');
+            $participants[$i]->setPassword($password);
+
+
             $participants[$i]->setIsActive(true);
             $participants[$i]->setCampus($campuses[mt_rand(0, 2)]);
 
