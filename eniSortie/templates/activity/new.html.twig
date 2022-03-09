@@ -1,11 +1,43 @@
 {% extends 'model.html.twig' %}
 
-{% block title %}New Activity{% endblock %}
+{% block title %}
+{{ parent() }}
+New Activity{% endblock %}
 
 {% block main %}
-    <h1>Create new Activity</h1>
+    
+    
+    {# fonctionne mais Organizer ID passé a NULL #}
+    {% block body %}
+        <h1 class="text-align-center">Create new Activity</h1>
+       <div class="container col-md-6 text-center">
+        {{ form_start(activity) }}
+       
+        {{ form_row(activity.name)}}
+        {{ form_row(activity.startDate)}}
+        {{ form_row(activity.activityDuration)}}
+        {{ form_row(activity.registrationDeadline)}}
+        
+        {{ form_row(activity.nbRegistration)}}
+        {{ form_row(activity.activityDescription)}}
+        {{ form_row(activity.location)}}
+        {{ form_row(activity.status)}}
+        {{ form_row(activity.campus)}}
+        {# {{ form_row(activity.organizer)}} #}
+        {# {{ form_row(activity.participant)}} #}
+       
+        {{ form_widget(activity) }}
+        <div class="align-items-center">
+        <button type="submit" class="btn btn-success">Ajouter !</button>
+       </div>
+       </div>
+       
+        {{ form_end(activity) }}
+       
 
-    {{ include('activity/_form.html.twig') }}
+    {% endblock %}
 
-    <a href="{{ path('app_activity_index') }}">back to list</a>
+    {# {{ include('activity/_form.html.twig') }} #}
+
+    <a href="{{ path('new_activity') }}">back to list</a>
 {% endblock %}

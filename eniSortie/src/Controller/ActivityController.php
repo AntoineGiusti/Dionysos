@@ -17,22 +17,24 @@ class ActivityController extends AbstractController
 {
 
     /**
-     * @Route("/new", name="app_activity_new", methods={"GET", "POST"})
+     * @Route("/new", name="new_activity", methods={"GET","POST"})
      */
     public function new(Request $request, ActivityRepository $activityRepository): Response
     {
+       
         $activity = new Activity();
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $activityRepository->add($activity);
-            return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
-        }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($activity);
+            $em->flush();
+           }
 
-        return $this->renderForm('activity/new.html.twig', [
-            'activity' => $activity,
-            'form' => $form,
+        return $this->render('activity/new.html.twig', [
+            //'activity' => $activity,
+            'activity'=>$form->createView()
         ]);
     }
 
@@ -47,26 +49,29 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_activity_edit", methods={"GET", "POST"})
+     * @Route("/edit/{name}", name="app_activity_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
     {
+       
+        $activity = new Activity();
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $activityRepository->add($activity);
-            return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
-        }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($activity);
+            $em->flush();
+           }
 
-        return $this->renderForm('activity/edit.html.twig', [
-            'activity' => $activity,
-            'form' => $form,
+        return $this->render('activity/edit.html.twig', [
+            //'activity' => $activity,
+            'activity'=>$form->createView()
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_activity_delete", methods={"POST"})
+     * @Route("/delete", name="app_activity_delete", methods={"POST"})
      */
     public function delete(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
     {

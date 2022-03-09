@@ -25,6 +25,7 @@ class PrincipalController extends AbstractController
      */
     public function research(ActivityRepository $activityRepository): Response
     {
+        
         return $this->render('principal/research.html.twig', [
             'activities' => $activityRepository->findAll(),
             'titre'=>'Liste des activités',

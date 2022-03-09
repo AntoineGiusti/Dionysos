@@ -1,4 +1,22 @@
-<form method="post" action="{{ path('app_activity_delete', {'id': activity.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">
-    <button class="btn">Delete</button>
+{% extends 'model.html.twig' %}
+
+{% block title %}
+{{ parent() }}
+Delete Activity{% endblock %}
+
+{% block main %}
+{% block body %}
+
+<form method="post" action="{{ path('app_activity_delete', {'name': activity.name}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <label type="text" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">{{ activity.name}}</label>
+    <label type="hidden" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">{{ activity.name}}</label>
+    <label type="hidden" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">{{ activity.name}}</label>
+    <label type="hidden" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">{{ activity.name}}</label>
+    <button class="btn">annuler</button>
 </form>
+
+
+
+
+{% endblock %}
+{% endblock %}
