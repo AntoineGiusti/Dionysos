@@ -1,0 +1,11 @@
+{% extends 'model.html.twig' %}
+
+{% block title %}New Activity{% endblock %}
+
+{% block main %}
+    <h1>Create new Activity</h1>
+
+    {{ include('activity/_form.html.twig') }}
+
+    <a href="{{ path('app_activity_index') }}">back to list</a>
+{% endblock %}
