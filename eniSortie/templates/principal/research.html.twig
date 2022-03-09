@@ -11,8 +11,9 @@
 {%  block body %}
 
     <!-- partie affichage liste d'activitees -->
-        <div>
-            <table class="table table-striped table-hover ">
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
+            <table class="table table-striped table-hover table-responsive">
                     <thead>
                     <tr>
                         <th>Nom de la sortie</th>
@@ -29,15 +30,13 @@
                     <tbody>
                     {% for activity in activities %}
                         <tr>
-
-
                             <td>{{ activity.name }}</td>
                             <td>{{ activity.startDate ? activity.startDate|date('Y-m-d H:i:s') : '' }}</td>
                             <td>{{ activity.registrationDeadline ? activity.registrationDeadline|date('Y-m-d H:i:s') : '' }}</td>
                             <td>{{ activity.nbRegistration }}</td>
-                            <td>ETATS</td>
-                            <td>INSCRIT ?</td>
-                            <td>ORGANISATEUR ?</td>
+                            <td>{{ activity.Status.wording }}</td>
+                            <td> INSCRITS ??? </td>
+                            <td>{{ activity.organizer.firstname }} {{ activity.organizer.lastname }}</td>
                             <td>ACTIONS ?</td>
                         </tr>
                     {% else %}
@@ -47,6 +46,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                </div>
         </div>
     {% endblock %}
 
