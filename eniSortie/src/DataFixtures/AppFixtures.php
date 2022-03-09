@@ -17,6 +17,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
         $campusName = ['CHARTRES DE BRETAGNE', 'SAINT HERBLAIN', 'LA ROCHE SUR YON'];
         $campuses = [];
         foreach ($campusName as $name) {
@@ -26,6 +27,9 @@ class AppFixtures extends Fixture
             $campuses[] = $campus;
         }
 
+        //Ici seulement pour tester la BDD
+        //Le status dépend des heures de début et de fin d'inscription, d'activités etc.
+        //Et du nb d'utilisateurs.
         $statusName = ['Créée','Ouverte','Activité en cours','Cloturée','Passée','Annulée','Historisée'];
         $statuses = [];
         foreach ($statusName as $name){
@@ -55,11 +59,11 @@ class AppFixtures extends Fixture
 
         $towns = [];
         for ($i = 0; $i < 10; $i++) {
-            $town = new Town();
+           $town = new Town();
             $town->setName($faker->city);
             $town->setPostalCode($faker->postcode);
-            $manager->persist($town);
-            $towns[] = $town;
+           $manager->persist($town);
+           $towns[] = $town;
         }
 
       

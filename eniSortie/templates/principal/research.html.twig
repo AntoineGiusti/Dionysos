@@ -178,21 +178,40 @@
 
         <div class="container" >
             <table class="table table-striped">
-                <thead>
+                    <thead>
+                    <tr>
+
+
+                        <th>Nom de la sortie</th>
+                        <th>Date de la sortie</th>
+                        <th>Clôture</th>
+                        <!-- Il s'agit du nombre de place total, il faudra ensuite indiquer le nb d'inscrits/nb places-->
+                        <th>Nombre de place</th>
+                        <th>Etat</th>
+                        <th>Inscrit</th>
+                        <th>Organisateur</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
                     <tbody>
-                        <td>
-                            <th>Nom de la sortie</th>
-                            <th>Date de la sortie</th>
-                            <th>Cloture</th>
-                            <th>Inscrit/Place</th>
-                            <th>Etat</th>
-                            <th>Inscrit</th>
-                            <th>Organisateur</th>
-                            <th>Action</th>
-                        </td>
+                    {% for activity in activities %}
+                        <tr>
+                            <td>{{ activity.name }}</td>
+                            <td>{{ activity.startDate ? activity.startDate|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ activity.registrationDeadline ? activity.registrationDeadline|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ activity.nbRegistration }}</td>
+                            <td>ETATS</td>
+                            <td>INSCRIT ?</td>
+                            <td>ORGANISATEUR ?</td>
+                            <td>ACTIONS ?</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
-                </thead>
-            </table>
+                </table>
         </div>
 
 
