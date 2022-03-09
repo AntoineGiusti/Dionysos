@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DataFixtures;
+
 use DateInterval;
 use App\Entity\Activity;
 use App\Entity\Town;
@@ -17,6 +18,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
         $campusName = ['CHARTRES DE BRETAGNE', 'SAINT HERBLAIN', 'LA ROCHE SUR YON'];
         $campuses = [];
         foreach ($campusName as $name) {
@@ -26,14 +28,16 @@ class AppFixtures extends Fixture
             $campuses[] = $campus;
         }
 
+        //Ici seulement pour tester la BDD
+        //Le status dépend des heures de début et de fin d'inscription, d'activités etc.
+        //Et du nb d'utilisateurs.
         $statusName = ['Créée','Ouverte','Activité en cours','Cloturée','Passée','Annulée','Historisée'];
         $statuses = [];
-        foreach ($statusName as $name){
-            $status= new Status();
+        foreach ($statusName as $name) {
+            $status = new Status();
             $status->setWording($name);
             $manager->persist($status);
             $statuses[] = $status;
-
         }
 
         $faker = Faker\Factory::create('fr_FR');
@@ -55,15 +59,15 @@ class AppFixtures extends Fixture
 
         $towns = [];
         for ($i = 0; $i < 10; $i++) {
-            $town = new Town();
+           $town = new Town();
             $town->setName($faker->city);
             $town->setPostalCode($faker->postcode);
-            $manager->persist($town);
-            $towns[] = $town;
+           $manager->persist($town);
+           $towns[] = $town;
         }
 
-      
-       
+
+
         $locations = array();
         for ($i = 0; $i < 15; $i++) {
             $locations[$i] = new Location();
@@ -76,14 +80,16 @@ class AppFixtures extends Fixture
             $manager->persist($locations[$i]);
         }
 
-        
 
-        $towns = ['Rennes', 'Nantes', 'Quimper', 'Paris', 'Toulouse',
-        'Lorient', 'Lyon', 'Tour', 'Angers', 'Lille',
-        'Marseille', 'Rouen', 'Poitiers', 'Limoges', 'Dijon',
-        'Valence', 'Bayonne','Brest','Dunkerque','Montpellier'];
-        $ActivityNamePart1 = ['Sortie à ', 'Allons à ', 'Visite de ', 'Fête à ','Let\'s go to '];
-        $ActivityDescriptionPart1= ['Partons tous à pour le week-end à ', 'Allons nous amuser à ', 'Rendez-vous à l\'école puis on part tous en bus pour aller à ', 'Fête à '];
+
+        $towns = [
+            'Rennes', 'Nantes', 'Quimper', 'Paris', 'Toulouse',
+            'Lorient', 'Lyon', 'Tour', 'Angers', 'Lille',
+            'Marseille', 'Rouen', 'Poitiers', 'Limoges', 'Dijon',
+            'Valence', 'Bayonne', 'Brest', 'Dunkerque', 'Montpellier'
+        ];
+        $ActivityNamePart1 = ['Sortie à ', 'Allons à ', 'Visite de ', 'Fête à ', 'Let\'s go to '];
+        $ActivityDescriptionPart1 = ['Partons tous à pour le week-end à ', 'Allons nous amuser à ', 'Rendez-vous à l\'école puis on part tous en bus pour aller à ', 'Fête à '];
         for ($i = 0; $i < count($towns); $i++) {
             $activity = new Activity();
             $activity->setName($ActivityNamePart1[mt_rand(0, count($ActivityNamePart1) - 1)] . $towns[$i]);
@@ -91,29 +97,29 @@ class AppFixtures extends Fixture
             $activity->setCampus($campuses[mt_rand(0, 2)]);
             $activity->setOrganizer($participants[mt_rand(0, 14)]);
             $minutes = strval(mt_rand(5, 120)) . ' minutes';
-            $activity->setActivityDuration($faker->randomNumber(3,false));
+            $activity->setActivityDuration($faker->randomNumber(3, false));
             $activity->setNbRegistration(mt_rand(2, 25));
             $date1 = $faker->dateTimeBetween('-40days', '+40days');
 
-        $dateString = date_format($date1,'Y-m-d');
-        //$date2 = $faker->dateTimeBetween('-40days', '+40days');
-        $date2=$faker->dateTimeInInterval($dateString,'-7days');
-        if ($date1 > $date2) {
-            $activity->setStartDate($date1);
-            $activity->setRegistrationDeadline($date2);
-        } else {
-            $activity->setStartDate($date2);
-            $activity->setRegistrationDeadline($date1);
+            $dateString = date_format($date1, 'Y-m-d');
+            //$date2 = $faker->dateTimeBetween('-40days', '+40days');
+            $date2 = $faker->dateTimeInInterval($dateString, '-7days');
+            if ($date1 > $date2) {
+                $activity->setStartDate($date1);
+                $activity->setRegistrationDeadline($date2);
+            } else {
+                $activity->setStartDate($date2);
+                $activity->setRegistrationDeadline($date1);
+            }
+            $activity->setLocation($locations[mt_rand(0, 14)]);
+            // $activity->setLocation($this->mapService->geocodeAddress('mairie', $towns[$i]));
+
+
+            $activity->setStatus($statuses[mt_rand(0, 6)]);
+            $manager->persist($activity);
         }
-        $activity->setLocation($locations[mt_rand(0, 14)]);
-       // $activity->setLocation($this->mapService->geocodeAddress('mairie', $towns[$i]));
 
 
-        $activity->setStatus($statuses[mt_rand(0, 6)]); 
-        $manager->persist($activity);
-        }
-
-     
 
         $manager->flush();
     }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ActivityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,14 +19,15 @@ class PrincipalController extends AbstractController
     //     ]);
     // }
 
+//Afficher la liste des activités pour ensuite faire la recherche
      /**
      * @Route("/", name="home")
      */
-    public function research(): Response
+    public function research(ActivityRepository $activityRepository): Response
     {
-        
-        return $this->render('principal/research.html.twig',  [
-             'titre' => 'research page',
+        return $this->render('principal/research.html.twig', [
+            'activities' => $activityRepository->findAll(),
+            'titre'=>'Liste des activités',
         ]);
     }
 }
