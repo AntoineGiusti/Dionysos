@@ -41,7 +41,12 @@
                         </div> #}
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
-            <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Ajouter activité</a>
+            <a href="{{ path('new_activity') }}" class="btn btn-primary px-3 d-none d-lg-flex">Ajouter activité</a>
+
+            {% if app.user %}
+                <a href="" class="btn btn-info px-3 mx-3 d-none d-lg-flex" >Mon profil</a>
+            {% endif %}
+
 
             {% if app.user %}
                     <a href="{{ path('app_logout') }}" class="btn btn-secondary px-3 mx-3 d-none d-lg-flex" >Déconnexion</a>

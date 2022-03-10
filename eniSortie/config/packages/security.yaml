@@ -26,8 +26,8 @@ security:
            
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_login
+                # Lors de la déco, renvoit sur la page de login
+                target: app_login
 
             #Activation du système remember_me
             remember_me:
