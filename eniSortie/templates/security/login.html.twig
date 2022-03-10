@@ -12,6 +12,7 @@
         <div class="card border-0 shadow rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
             <h5 class="card-title text-center mb-5 fw-light fs-5">Identifiez-vous</h5>
+
             <form method="POST">
               {% if error %}
                  <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -32,21 +33,17 @@
                 <label for="floatingPassword">Mot de passe</label>
               </div>
 
-              <div class="form-check mb-3">
-                <input class="form-check-input" name="_remember_me" type="checkbox" value="" id="rememberPasswordCheck">
-                <label class="form-check-label" for="rememberPasswordCheck">
-                 Se souvenir de moi
+
+
+                <label>
+                  <input type="checkbox" name="_remember_me" checked/>
+                  Se souvenir de moi
                 </label>
 
-                {#iteration 2
-                <a href="#!" class="ml-3">Mot de passe oublié ?</a>#}
-
-              </div>
-              
-              <div class="d-grid">
-                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">S'identifier</button>
-              </div>
-              <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                  <div class="d-grid">
+                    <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">S'identifier</button>
+                  </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
             </form>
           </div>

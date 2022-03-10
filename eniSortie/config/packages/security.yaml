@@ -29,6 +29,11 @@ security:
                 # where to redirect after logout
                 # target: app_login
 
+            #Activation du système remember_me
+            remember_me:
+                secret: '%kernel.secret%' #C'est utilisé pour "signer" la valeur du cookie "Remember me" et le paramètres kernel.secret provient en fait du fichier .env
+                lifetime: 60  #durée de vie du remember me en seconde Ici une min pour tester
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -45,8 +50,7 @@ security:
 when@test:
     security:
         # test suite à  https://symfonycasts.com/screencast/symfony-security/auth-errors
-        hide_user_not_found: false
-        #This tells Symfony to not convert UserNotFoundException to a BadCredentialsException.
+        #hide_user_not_found: true
 
         password_hashers:
             # By default, password hashers are resource intensive and take time. This is
