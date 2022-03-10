@@ -112,5 +112,11 @@ class ActivityController extends AbstractController
      }
     
     
-    
+    /**
+     * 0Route("/detail/{id}", name="app_activity_detail")
+     */
+    public function showActivityDetail( Activity $activity, EntityManagerInterface $em): Response 
+    {
+
+    }
 }
