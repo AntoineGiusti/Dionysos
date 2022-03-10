@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Activity;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
+use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,7 @@ class ActivityController extends AbstractController
 {
 
     /**
-     * @Route("/new", name="new_activity", methods={"GET","POST"})
+     * @Route("/new", name="new_activity")
      */
     public function new(Request $request, ActivityRepository $activityRepository): Response
     {
@@ -40,20 +41,38 @@ class ActivityController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_activity_show", methods={"GET"})
-     */
-    public function show(Activity $activity): Response
-    {
-        return $this->render('activity/show.html.twig', [
-            'activity' => $activity,
-        ]);
-    }
+    // /**
+    //  * @Route("/", name="home")
+    //  */
+    // public function show(CampusRepository $campusRepository, ActivityRepository $activityRepository): Response
+    // {
+    //     $activityList = $activityRepository->findAll();
+    //     $campus = $campusRepository->findAll();
+
+    //     $createSearchType = new ModelSearchType();
+    //     $form = $this->createForm(EventSearchType::class, $createSearchType);
+    //     $form->handleRequest($request);
+
+    //     if($form->isSubmitted()&& $form->isValid()){
+    //         $data = $form->getData();
+    //         $user = $this->getUser();
+    //         $activityList = $activityRepository->searchByFilter($data, $user);
+
+    //     }
+        
+    //     return $this->render('home',[
+    //         'activity' => $activityList,
+    //         'campus'=>$campus,
+    //         'formulaire' => $form->createView(),
+            
+    //     ]);
+
+    // }
 
     /**
      * @Route("/edit/{id}", name="app_activity_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
+    public function edit(Request $request, Activity $activity): Response
     {
        
         $activity ;
@@ -79,7 +98,7 @@ class ActivityController extends AbstractController
     public function remove(int $id , ActivityRepository $activityRepository, EntityManagerInterface $em): Response
     {
          
-        dump($id);
+        //dump($id);
         $activity = $activityRepository->find($id);
        
        

@@ -14,6 +14,7 @@
 
 {%  block body %}
 
+
     <!-- partie affichage liste d'activitees -->
         <div class="row justify-content-center">
             <div class="col-sm-10">
@@ -39,7 +40,12 @@
                             <td>{{ activity.registrationDeadline ? activity.registrationDeadline|date('Y-m-d H:i:s') : '' }}</td>
                             <td>{{ activity.nbRegistration }}</td>
                             <td>{{ activity.Status.wording }}</td>
-                            <td> INSCRIT ? </td>
+                            <td>
+                           
+                             INSCRIT ? 
+                             
+                             
+                             </td>
                             <td>{{ activity.organizer.firstname }} {{ activity.organizer.lastname }}</td>
                             <td>ACTIONS ?</td>
                         </tr>
