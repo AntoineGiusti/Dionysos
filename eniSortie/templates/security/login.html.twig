@@ -1,55 +1,63 @@
+{# Le extends permet de récup. le <head> et la bib. JS#}
 {% extends 'model.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
 
 {% block main %}
 
-  <!-- Ici le code HTML / BOOTSTRAP pour la page d'identification -->
-  <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card border-0 shadow rounded-3 my-5">
-          <div class="card-body p-4 p-sm-5">
-            <h5 class="card-title text-center mb-5 fw-light fs-5">Identifiez-vous</h5>
+{# Le include permet de "rajouter" le header sans carousel du headerlight.html.twig#}
+    {% include('headerlight.html.twig') %}
 
-            <form method="POST">
-              {% if error %}
-                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-             {% endif %}
+    {% block body %}
+{# Ici le code HTML spécifique à la page de login #}
+        <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card border-0 shadow rounded-3 my-5">
+                        <div class="card-body p-4 p-sm-5">
+                            <h5 class="card-title text-center mb-5 fw-light fs-5">Identifiez-vous</h5>
 
-             {% if app.user %}
-                <div class="mb-3">
-                 Vous êtes identifié comme {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                            <form method="POST">
+                                {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
+
+                                {% if app.user %}
+                                    <div class="mb-3">
+                                        Vous êtes identifié comme {{ app.user.username }}, <a
+                                                href="{{ path('app_logout') }}">Logout</a>
+                                    </div>
+                                {% endif %}
+                                <div class="form-floating mb-3">
+                                    <input type="email" name="email" value="{{ last_username }}" class="form-control"
+                                           id="inputMail" placeholder="name@example.com" required autofocus>
+                                    <label for="inputMail">Email</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="password" name="password" class="form-control" id="inputPassword"
+                                           placeholder="Password">
+                                    <label for="floatingPassword">Mot de passe</label>
+                                </div>
+                                <label>
+                                    <input type="checkbox" name="_remember_me" checked/>
+                                    Se souvenir de moi
+                                </label>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">
+                                        S'identifier
+                                    </button>
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            </form>
+                        </div>
+                    </div>
                 </div>
-              {% endif %}
-              <div class="form-floating mb-3">
-                <input type="email" name="email" value="{{ last_username }}" class="form-control" id="inputMail" placeholder="name@example.com" required autofocus>
-                <label for="inputMail">Email</label>
-              </div>
 
-              <div class="form-floating mb-3">
-                <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
-                <label for="floatingPassword">Mot de passe</label>
-              </div>
-
-
-
-                <label>
-                  <input type="checkbox" name="_remember_me" checked/>
-                  Se souvenir de moi
-                </label>
-
-                  <div class="d-grid">
-                    <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">S'identifier</button>
-                  </div>
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</body>
+        </body>
+    {% endblock %}
+
 {% endblock %}
