@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
       /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $photoFilename;
 
