@@ -7,6 +7,7 @@ use App\Entity\Campus;
 use App\Entity\Location;
 use App\Entity\Participant;
 use App\Entity\Status;
+use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -44,10 +45,7 @@ class ActivityType extends AbstractType
 
             ]);
 
-            // ->add('organizer', IntegerType::class,[
-            //     'class'=>Activity::class,
-            //     'choice_label'=>'organizer_id'
-            // ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

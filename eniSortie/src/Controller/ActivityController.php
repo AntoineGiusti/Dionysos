@@ -25,6 +25,7 @@ class ActivityController extends AbstractController
         $activity = new Activity();
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
+        $activity->setOrganizer($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -34,7 +35,7 @@ class ActivityController extends AbstractController
 
         return $this->render('activity/new.html.twig', [
             //'activity' => $activity,
-            'activity'=>$form->createView()
+            'activity'=>$form->createView() 
         ]);
     }
 
@@ -49,14 +50,15 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{name}", name="app_activity_edit", methods={"GET", "POST"})
+     * @Route("/edit/{id}", name="app_activity_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
     {
        
-        $activity = new Activity();
+        $activity ;
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
+        $activity->setOrganizer($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -71,7 +73,7 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/delete", name="app_activity_delete", methods={"POST"})
+     * @Route("/{id}/delete", name="app_activity_delete", methods={"POST"})
      */
     public function delete(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
     {
