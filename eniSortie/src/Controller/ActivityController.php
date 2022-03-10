@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Activity;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,14 +75,16 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="app_activity_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="app_activity_delete")     
      */
-    public function delete(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
+    public function remove(Activity $activity, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$activity->getId(), $request->request->get('_token'))) {
-            $activityRepository->remove($activity);
-        }
+        // dd($activity);
+        $em->remove($activity);        
+        $em->flush();
 
-        return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('activity/_delete_form.html.twig');
     }
+    
+    
 }
