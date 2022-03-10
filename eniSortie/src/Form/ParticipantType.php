@@ -6,6 +6,9 @@ use App\Entity\Participant;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 
 class ParticipantType extends AbstractType
 {
@@ -21,6 +24,22 @@ class ParticipantType extends AbstractType
             ->add('isActive')
             ->add('campus',null, ['choice_label'=>'name'])
             ->add('activities',null, ['choice_label'=>'name'])
+            ->add('photo', FileType::class, [
+                'label' => 'Photo (jpeg,png file)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid document',
+                    ])
+                    
+                ],
+                ])
         ;
     }
 
