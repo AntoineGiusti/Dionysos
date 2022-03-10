@@ -1,22 +1,40 @@
 {% extends 'model.html.twig' %}
 
 {% block title %}
-{{ parent() }}
-Delete Activity{% endblock %}
+    {{ parent() }}
+    Delete Activity
+{% endblock %}
 
 {% block main %}
-{% block body %}
+    {% block body %}  
 
-<form method="post" action="{{ path('app_activity_delete', {'name': activity.name}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <label type="text" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">{{ activity.name}}</label>
-    <label type="hidden" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">{{ activity.name}}</label>
-    <label type="hidden" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">{{ activity.name}}</label>
-    <label type="hidden" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">{{ activity.name}}</label>
-    <button class="btn">annuler</button>
-</form>
+    <h1 class="text-align-center">Delete Activity</h1>
+    <div class="container col-md-6 text-center">
+        {{ form_start(activity) }}
+       
+        {{ form_row(activity.name) }} #}
+        {{ form_row(activity.startDate)}}
+        {{ form_row(activity.activityDuration)}}
+        {{ form_row(activity.registrationDeadline)}}        
+        {{ form_row(activity.nbRegistration)}}
+        {{ form_row(activity.activityDescription)}}
+        {{ form_row(activity.location)}}
+        {{ form_row(activity.status)}}
+        {{ form_row(activity.campus)}}
+        {# {{ form_row(activity.Organizer)}} #}
+        {# {{ form_row(activity.participant)}} #}
+       
+        {{ form_widget(activity) }}
+        <div class="align-items-center">
+            <button type="submit" name="delete" class="btn btn-danger" href= "{{ path('app_activity_delete', {id: x.id}) }}">Supprimer !</button>
+        </div>
+        <div class="align-items-center">
+            <button type="submit" name="annuler" class="btn btn-dark">Annuler !</button>
+        </div>
+    </div>
+       
+        {{ form_end(activity) }}
 
 
-
-
-{% endblock %}
+{   % endblock %}
 {% endblock %}

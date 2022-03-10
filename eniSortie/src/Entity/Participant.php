@@ -16,6 +16,23 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
+      /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $photoFilename;
+
+    public function getPhotoFilename()
+    {
+        return $this->photoFilename;
+    }
+
+    public function setPhotoFilename($photoFilename)
+    {
+        $this->photoFilename = $photoFilename;
+
+        return $this;
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
