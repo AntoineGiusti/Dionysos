@@ -30,18 +30,19 @@ class ParticipantController extends AbstractController
          */
         $participant= $this->getUser();
 
-
-
-        $form = $this->createForm(ParticipantType::class, $participant);
+        $form = $this->createForm(ParticipantType::class, $this->getUser());
         $form->handleRequest($request);
         $password=$form->get('password')->getData();
+
+//        dd($form->isSubmitted());
         if ($form->isSubmitted() && $form->isValid())
+
          {
 
             /** @var UploadedFile $photoFile */
              //Upload de l'image
             $photoFile = $form->get('photo')->getData();
-           
+
             if ($photoFile) 
             {
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);

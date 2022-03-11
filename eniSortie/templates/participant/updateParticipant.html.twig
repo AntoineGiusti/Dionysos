@@ -15,7 +15,8 @@
 <hr class="mt-0 mb-4">
 <div class="row">
     <div class="col-xl-4">
-        <form action="{{ path('update_participant') }}" method="post" >
+
+        {{ form_start(formulaire) }}
         <!-- Profile picture card-->
         <div class="card mb-4 mb-xl-0">
             <div class="card-header">Photo de profil</div>
@@ -44,12 +45,12 @@
                         <!-- Prénom)-->
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputFirstName">Prénom</label>
-                            {{ form_widget(formulaire.firstname) }}
+                            {{ form_row(formulaire.firstname) }}
                         </div>
                         <!-- Nom -->
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputLastName">Nom</label>
-                            {{ form_widget(formulaire.lastname) }}
+                            {{ form_fow(formulaire.lastname) }}
                         </div>
                     </div>
 
@@ -87,8 +88,9 @@
                     </div>
                     <!-- Save changes button-->
                     <button class="btn btn-primary" type="submit">Modifier mon profil</button>
-                </form>
-            </div>
+            {{form_end(formulaire)}}
+
+        </div>
         </div>
     </div>
 </div>

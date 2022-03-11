@@ -33,9 +33,9 @@ class ParticipantType extends AbstractType
             ->add('lastname')
             ->add('firstname')
             ->add('phoneNumber')
-            ->add('isActive')
-            ->add('campus',null, ['choice_label'=>'name'])
-            ->add('activities',null, ['choice_label'=>'name'])
+//            ->add('isActive')
+//            ->add('campus',null, ['choice_label'=>'name'])
+//            ->add('activities',null, ['choice_label'=>'name'])
             ->add('photo', FileType::class, [
                 'label' => 'Photo (jpeg,png file)',
                 'mapped' => false,
