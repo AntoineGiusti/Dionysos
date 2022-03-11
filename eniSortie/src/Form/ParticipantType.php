@@ -25,8 +25,8 @@ class ParticipantType extends AbstractType
                'invalid_message' => 'The password fields must match.',
                'options' => ['attr' => ['class' => 'password-field']],
                'required' => false,
-               'first_options'  => ['label' => ''],
-               'second_options' => ['label' => ''],
+               'first_options'  => ['label' => false],
+               'second_options' => ['label' => false],
                'mapped' => false,
            ])
 

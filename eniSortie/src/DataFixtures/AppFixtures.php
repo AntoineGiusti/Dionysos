@@ -50,6 +50,7 @@ class AppFixtures extends Fixture
         }
 
         $faker = Faker\Factory::create('fr_FR');
+        $faker->seed(1337);
         //On créé 15 participants avec noms et prénoms aléatoires en français"
         $participants = array();
         for ($i = 0; $i < 15; $i++) {

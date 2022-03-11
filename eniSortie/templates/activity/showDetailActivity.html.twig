@@ -3,71 +3,97 @@
 {% block title %} Activity detail{% endblock %}
 
 {% block main %}
-    <h1>Activity</h1>
 
     {% include('navbar.html.twig') %}
-    {% include('header.html.twig') %}
-    {% include('search.html.twig') %}
+
 
     
     {% block body %}
-<div>
-     <table class="table table-striped">
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ activity.name }}</td>
-            </tr>
-            <tr>
-                <th>StartDate</th>
-                <td>{{ activity.startDate | date('Y-m-d H:i:s')}}</td>
-            </tr>
-            <tr>
-                <th>ActivityDuration</th>
-                <td>{{ activity.activityDuration }}</td>
-            </tr>
-            <tr>
-                <th>RegistrationDeadline</th>
-                <td>{{ activity.registrationDeadline | date('Y-m-d H:i:s')}}</td>
-            </tr>
-            <tr>
-                <th>NbRegistration</th>
-                <td>{{ activity.nbRegistration }}</td>
-            </tr>
-            <tr>
-                <th>ActivityDescription</th>
-                <td>{{ activity.activityDescription }}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 
-<div class="col-4">
-    <table class="table table-striped">
-    <thead>
-        <tbody>
-    
-         
-            <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            </tr>
+<div class="container-xl px-4 mt-4">
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card mb-4">
+                <div class="card-header"> {{ activity.name }} </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th>Activité</th>
+                            <td>{{ activity.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td>{{ activity.startDate | date('Y-m-d H:i:s')}}</td>
+                        </tr>
+                        <tr>
+                            <th>Durée</th>
+                            <td>{{ activity.activityDuration }} min</td>
+                        </tr>
+                        <tr>
+                            <th>Date limite d'inscription</th>
+                            <td>{{ activity.registrationDeadline | date('Y-m-d H:i:s')}}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre d'inscrits</th>
+                            <td>nb inscrits / {{ activity.nbRegistration }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ activity.activityDescription }}</td>
+                        </tr>
+                        <tr>
+                            <th>Campus</th>
+                            <td>{{ activity.Campus.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Lieu</th>
+                            <td>{{ activity.Location.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse</th>
+                            <td>{{ activity.Location.street }} {{ activity.Location.Town.name }}</td>
+                        </tr>
 
-            {% for activity in activity.participant %}
-            <tr>
-            <td>{{ activity.lastname }}</td>
-            
-            <td>{{ activity.firstname }}</td>
-             </tr>
-       {% endfor %}
-       </tbody>
-    </thead>
-    </table>  
-</div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <div class="col-xl-4">
+        <div class="card mb-4 mb-xl-0">
+            <div class="card-header">Participants</div>
+            <div class="card-body text-center">
+                <table class="table table-striped">
+                    <thead>
+                    <tbody>
+
+
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                    </tr>
+
+                    {% for activity in activity.participant %}
+                        <tr>
+                            <td>{{ activity.lastname }}</td>
+
+                            <td>{{ activity.firstname }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
     {# </div> #}
     {# <div class = "butn-group">
     <a href="{{ path('show_detail_activity',{"id":activity.id})}}">Détail de l'activité</a>
     </div> bouton à récupérer pour l'écran principal des activités #}
-
+        {% include('footer.html.twig') %}
     {% endblock %}
 {% endblock %}
