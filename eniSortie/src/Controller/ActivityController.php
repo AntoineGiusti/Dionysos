@@ -3,12 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
+use App\Entity\Participant;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use App\Repository\CampusRepository;
+<<<<<<< HEAD
 use App\Repository\StatusRepository;
+=======
+use App\Repository\ParticipantRepository;
+>>>>>>> feb46dfc8acc0848406842b2168a4728432159ce
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -112,6 +119,7 @@ class ActivityController extends AbstractController
    
      }
 
+<<<<<<< HEAD
     //   /**
     //  * @Route("/home", name="filtre_activity")
     //  */
@@ -130,5 +138,20 @@ class ActivityController extends AbstractController
 
 
     
+=======
+       /**
+     * @Route("/showDetailActivity/{id}", name="show_detail_activity")     
+     */
+    public function showDetailActivity( Activity $activity, ActivityRepository $activityRepository, ParticipantRepository $participantRepository): Response
+    {
+         
+        return $this->render('activity/showDetailActivity.html.twig', [
+            'activity' => $activity
+            
+            
+        ]);
+   
+     }
+>>>>>>> feb46dfc8acc0848406842b2168a4728432159ce
     
 }
