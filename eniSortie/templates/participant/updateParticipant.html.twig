@@ -3,11 +3,9 @@
 {% block title %}modifier participant{% endblock %}
 
 {% block main %}
-<<<<<<< HEAD
 
     {% include('navbar.html.twig') %}
     {% include('headerlight.html.twig') %}
-
 
     {% block body %}
 
@@ -164,14 +162,4 @@
 {#        </div>#}
 
     {% endblock %}
-=======
-
-
-{{ form_start(formulaire)}}
-{{ form_row(formulaire.photo) }}
-{# <img class="logo" src="{{ asset('upload/' ~ participant.photoFile)}}"> #}
-{{ form_widget(formulaire)}}
-<button class="btn btn-info" type="submit">Modifier</button>
-{{ form_end(formulaire)}}
->>>>>>> 8ebcf5c ( maj)
 {% endblock %}

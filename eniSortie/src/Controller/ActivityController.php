@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
+use App\Entity\Participant;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use App\Repository\CampusRepository;
+use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -108,6 +112,20 @@ class ActivityController extends AbstractController
         }
 
         return $this->redirectToRoute('home');
+   
+     }
+
+       /**
+     * @Route("/showDetailActivity/{id}", name="show_detail_activity")     
+     */
+    public function showDetailActivity( Activity $activity, ActivityRepository $activityRepository, ParticipantRepository $participantRepository): Response
+    {
+         
+        return $this->render('activity/showDetailActivity.html.twig', [
+            'activity' => $activity
+            
+            
+        ]);
    
      }
     
