@@ -7,8 +7,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class ParticipantType extends AbstractType
 {
@@ -17,7 +20,15 @@ class ParticipantType extends AbstractType
         $builder
             ->add('email')
            // ->add('roles') roles à definir plus tard, fait planter le formulaire pour le moment
-            ->add('password')
+            ->add('password', RepeatedType::class, [
+               'type' => PasswordType::class,
+               'invalid_message' => 'The password fields must match.',
+               'options' => ['attr' => ['class' => 'password-field']],
+               'required' => false,
+               'first_options'  => ['label' => ''],
+               'second_options' => ['label' => ''],
+           ])
+
             ->add('lastname')
             ->add('firstname')
             ->add('phoneNumber')
