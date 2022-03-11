@@ -27,6 +27,7 @@ class ParticipantType extends AbstractType
                'required' => false,
                'first_options'  => ['label' => ''],
                'second_options' => ['label' => ''],
+               'mapped' => false,
            ])
 
             ->add('lastname')

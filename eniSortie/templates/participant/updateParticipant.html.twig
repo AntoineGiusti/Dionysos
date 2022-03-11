@@ -22,9 +22,10 @@
             <div class="card-header">Photo de profil</div>
             <div class="card-body text-center">
                 <!-- Profile picture image-->
-                {% if participant.photoFilename == null %}
-                {% else %}
+                {% if participant.photoFilename is defined %}
                     <img class="img-thumbnail " alt="photo de profil" src="{{ asset('uploads/') }}{{ participant.photoFilename }}" >
+                {% else %}
+
                 {% endif %}
                 <!-- Profile picture help block-->
                 <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
