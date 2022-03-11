@@ -6,6 +6,7 @@ use App\Entity\Activity;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use App\Repository\CampusRepository;
+use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,7 +111,24 @@ class ActivityController extends AbstractController
         return $this->redirectToRoute('home');
    
      }
+
+    //   /**
+    //  * @Route("/home", name="filtre_activity")
+    //  */
+    //  public function researchByStatusId(ActivityRepository $activityRepository, StatusRepository $statusRepository): Response
+    //  {
+    //     //  $activity = $activityRepository->findOneByStatus('8');
+    //     $activity = $activityRepository->findBy(array('status'=>$statusRepository->find('8')));
+    //     // dd($activity);
+        
+ 
+    //      return $this->render('research.html.twig');
     
+    //   }
+    
+   
+
+
     
     
 }
