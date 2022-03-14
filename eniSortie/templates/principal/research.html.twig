@@ -117,11 +117,11 @@
                             <td>{{ activity.name }}</td>
                             <td>{{ activity.startDate ? activity.startDate|date('Y-m-d H:i:s') : '' }}</td>
                             <td>{{ activity.registrationDeadline ? activity.registrationDeadline|date('Y-m-d H:i:s') : '' }}</td>
-                            <td>{{ activity.nbRegistration }}</td>
+                            <td>{{ activity.participant | length }}/{{activity.nbRegistration}}</td>
                             <td>{{ activity.Status.wording }}</td>
                             <td>
                            
-                             INSCRIT ? 
+                             <a class="form-check-input btn-info" name="registed" href="{{path ('app_isRegeisted', {id:activity.id})}}" type="checkbox" id="flexSwitchCheckDefault">s'inscrire</a>
                              
                              
                              </td>
