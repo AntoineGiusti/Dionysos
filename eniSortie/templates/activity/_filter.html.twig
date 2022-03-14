@@ -1,0 +1,41 @@
+{% extends 'model.html.twig' %}
+
+
+{% block main %}
+
+    {% block body %}
+
+
+
+        {{ form_start(form , {attr:{class: 'filter'}}) }}
+
+        <div class="card mb-4 mb-xl-0">
+            <div class="card-header"><h3>Filtrer les sorties</h3></div>
+            <div class="card-body">
+                <p>Le nom de la sortie contient : </p>
+                {{ form_row(form.q) }}
+                <p>Le campus : </p>
+                {{ form_row(form.campuses) }}
+
+                {{ form_row(form.isOrganizer) }}
+
+                {{ form_row(form.isRegistered) }}
+
+
+                <p>Entre {{ form_row(form.date1) }} et {{ form_row(form.date2) }}</p>
+
+                <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+                </div>
+
+
+        </div>
+
+
+
+        {{ form_end(form) }}
+
+
+
+
+    {% endblock %}
+{% endblock %}

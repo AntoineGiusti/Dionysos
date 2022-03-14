@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Stmt\TraitUseAdaptation\Alias;
 
 /**
  * @method Status|null find($id, $lockMode = null, $lockVersion = null)
@@ -44,6 +45,15 @@ class StatusRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    // public function findByFilter(){
+
+    //     $qb= $this->createQueryBuilder('c');
+
+    //     $qb->select
+
+    //     return $qb->getQuery()->getResult();
+    // }
 
     // /**
     //  * @return Status[] Returns an array of Status objects

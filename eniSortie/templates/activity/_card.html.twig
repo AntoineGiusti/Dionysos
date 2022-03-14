@@ -1,0 +1,28 @@
+                <tr>
+                    <td>{{ activity.name }}</td>
+                    <td>{{ activity.startDate ? activity.startDate|date('d-m-Y H:i:s') : '' }}</td>
+                    <td>{{ activity.registrationDeadline ? activity.registrationDeadline|date('d-m-Y') : '' }}</td>
+                    <!-- Il s'agit du nombre de place total, il faudra ensuite indiquer le nb d'inscrits/nb places-->
+
+                    <td>  / {{ activity.nbRegistration }}</td>
+                    <td>{{ activity.Status.wording }}</td>
+
+                    <td>
+                        {%  if  app.user.id != activity.organizer.id %}
+                            <input type="checkbox" id="inscription" name="inscription">
+                            <label for="inscription">Inscrit.e</label>
+                        {%  endif %}
+                    </td>
+                    <td>{{ activity.organizer.firstname }} {{ activity.organizer.lastname }}</td>
+
+                    <td>
+                        {%  if app.user %}
+                            <a href="{{ path('show_detail_activity', {id:activity.id}) }}" alt="Afficher la sortie">Afficher </a>
+                            <!--Modifier, Publier, Supprimer la sortie si Id User = Id Organisateur-->
+                            {%  if  app.user.id == activity.organizer.id %}
+                                <a href="{{ path('app_activity_edit', {id:activity.id}) }}" alt="Modifier la sortie">Modifier </a>
+                            {%  endif %}
+                        {%  endif  %}
+                    </td>
+                </tr>
+

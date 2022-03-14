@@ -137,6 +137,8 @@
       <path value="$PROJECT_DIR$/eniSortie/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/eniSortie/vendor/doctrine/cache" />
       <path value="$PROJECT_DIR$/eniSortie/vendor/symfony/apache-pack" />
+      <path value="$PROJECT_DIR$/eniSortie/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/eniSortie/vendor/knplabs/knp-paginator-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
