@@ -96,7 +96,9 @@ class ActivityRepository extends ServiceEntityRepository
         /////////////////////////////////////////////////////////////////////
 
 
+
         //ENTRE DATE 1 et DATE 2 FONCTIONNE /////////////////////////////////////
+
 
         if (!empty($search->date1)) {
             $query = $query

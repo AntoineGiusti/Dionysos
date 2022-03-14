@@ -10,31 +10,30 @@
 
     <h1 class="text-align-center">Delete Activity</h1>
     <div class="container col-md-6 text-center">
-        {{ form_start(activity) }}
-       
-        {{ form_row(activity.name) }} #}
-        {{ form_row(activity.startDate)}}
-        {{ form_row(activity.activityDuration)}}
-        {{ form_row(activity.registrationDeadline)}}        
-        {{ form_row(activity.nbRegistration)}}
-        {{ form_row(activity.activityDescription)}}
-        {{ form_row(activity.location)}}
-        {{ form_row(activity.status)}}
-        {{ form_row(activity.campus)}}
-        {# {{ form_row(activity.Organizer)}} #}
-        {# {{ form_row(activity.participant)}} #}
-       
-        {{ form_widget(activity) }}
-        <div class="align-items-center">
-            <button type="submit" name="delete" class="btn btn-danger" href= "{{ path('app_activity_delete', {id: x.id}) }}">Supprimer !</button>
-        </div>
-        <div class="align-items-center">
-            <button type="submit" name="annuler" class="btn btn-dark">Annuler !</button>
-        </div>
-    </div>
-       
-        {{ form_end(activity) }}
+        <p>nom de la sortie : {{ activity.name}} </p>
+        <p>date de la sortie : {{ activity.startDate | date('Y-m-d H:i:s')}} </p>
+        <p>campus : {{ activity.campus.name}} </p>
+        <p>lieu : {{ activity.location.name}} </p>
+        
 
+        <form method="post" >
+            <div>                
+                <label for="motif">Motif :</label>
+                
+                <input type="textarea" name="motif" cols='20' rows='5'>
+
+
+            <br>
+        <div>
+            <button type="submit" name="delete" class="btn btn-danger" action="{{ path('app_activity_delete', {id:activity.id}) }}">Supprimer !</button>
+            <button type="submit" name="annuler" class="btn btn-dark" action="{{path('home')}}">Annuler !</button>
+        </div>           
+                
+           
+        </form>
+
+     
+       
 
     {% endblock %}
 {% endblock %}
