@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
-
+use App\Entity\Activity;
 use App\Entity\Participant;
 use App\Form\ParticipantType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Repository\ActivityRepository;
 use App\Repository\ParticipantRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -113,4 +114,18 @@ class ParticipantController extends AbstractController
 
  }
 
+    /**
+     *  @Route("/{id}", name="app_isRegeisted")
+     */
+
+    public function isRegisted($id, Request $request, ActivityRepository $activityRepository,EntityManagerInterface $em)
+    {
+        $activity = $activityRepository->find($id);
+        //dd($activity);
+        $activity->addParticipant($this->getUser());
+        $em->persist($activity);
+        $em ->flush();
+    
+        return $this->redirectToRoute('home');
+    }
 }
