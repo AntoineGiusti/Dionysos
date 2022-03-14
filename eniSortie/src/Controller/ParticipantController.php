@@ -86,7 +86,6 @@ class ParticipantController extends AbstractController
         
     }
 
-    
 
     /**
      * @Route("/participantList", name="participantList")

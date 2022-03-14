@@ -7,11 +7,8 @@ use App\Entity\Participant;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use App\Repository\CampusRepository;
-<<<<<<< HEAD
 use App\Repository\StatusRepository;
-=======
 use App\Repository\ParticipantRepository;
->>>>>>> feb46dfc8acc0848406842b2168a4728432159ce
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -119,7 +116,6 @@ class ActivityController extends AbstractController
    
      }
 
-<<<<<<< HEAD
     //   /**
     //  * @Route("/home", name="filtre_activity")
     //  */
@@ -134,11 +130,9 @@ class ActivityController extends AbstractController
     
     //   }
     
-   
-
 
     
-=======
+
        /**
      * @Route("/showDetailActivity/{id}", name="show_detail_activity")     
      */
@@ -152,6 +146,5 @@ class ActivityController extends AbstractController
         ]);
    
      }
->>>>>>> feb46dfc8acc0848406842b2168a4728432159ce
     
 }
