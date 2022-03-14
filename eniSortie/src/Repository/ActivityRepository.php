@@ -52,8 +52,7 @@ class ActivityRepository extends ServiceEntityRepository
     
     public function filterSearch($activity)
     {   
-      $activity = new FilterSearch();
-
+      
        $qb = $this->createQueryBuilder('builder');
 
        $qb->select('buider');
