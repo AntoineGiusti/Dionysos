@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Activity;
+use App\Form\model\FilterSearch;
+use App\Form\FilterSearchType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\DateType;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -46,33 +49,63 @@ class ActivityRepository extends ServiceEntityRepository
     }
 
 
+    
+    public function filterSearch($activity)
+    {   
+      $activity = new FilterSearch();
 
-    // /**
-    //  * @return Activity[] Returns an array of Activity objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+       $qb = $this->createQueryBuilder('builder');
 
-    /*
-    public function findOneBySomeField($value): ?Activity
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+       $qb->select('buider');
+        // filtre les activités par inscription
+       if($registedMeActivity){
+             $qb->orWhere(':participant MEMBER OF builder.participant')
+                ->setParameter('participant', $participant);
+       }
+       if($unregistedMeActivity){
+           $qb->orWhere(':participant MEMBER OF builder.participant')
+           ->setParameter('participant', $participant);
+       }
+
+       if($activityOrganizer){
+           $qb->orWhere('participant MEMBER OF builder.participant')
+           ->setParameter('participant', $participant);
+       }
+
+       if($pastActivity){
+           $qb->orWhere('participant MEMBER OF builder.participant')
+           ->setParameter('participant',$participant);
+       }
+
+       if($campus !== null){
+           $qb->andWhere('builder.campus=campus')
+           ->setParameter('campus',$campus);
+       }
+       if($startDate !== null){
+           $qb->andWhere('builder.startDateTime >= :startDate')
+           ->setParameter('startDate', $startDate);
+       }
+
+       if($endDate !== null){
+           $qb->andWhere('builder.endDateTime >= :endDate ')
+           ->setParameter('endDate', $endDate);
+       }
+
+       if($search != null){
+           $qb->andWhere('builder.name LIKE :search')
+           ->setParameter('search', '%'.$search . '%');
+       }
+
+       return $qb->getQuery()->getResult();
+
+
+
+
+
+
+
+
+
     }
-    */
+    
 }
