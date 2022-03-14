@@ -100,20 +100,23 @@ class ActivityController extends AbstractController
     /**
      * @Route("/delete/{id}", name="app_activity_delete")     
      */
-    public function remove(int $id , ActivityRepository $activityRepository, EntityManagerInterface $em): Response
+    public function cancel(Request $request, Activity $activity, StatusRepository $statusRepository, EntityManagerInterface $em): Response
     {
          
-        //dump($id);
-        $activity = $activityRepository->find($id);
        
-       
-        if($activity){
-            $em->remove($activity);        
+        if ($request->get('motif')) {
+            $activity->setActivityDescription($request->get('motif'));
+            // ligne ci dessous a modifier quand on aura geré les status. codeActivity est une colonne en plus dans la BDD pour ne pas
+            //Travailler avec l'ID ou avec le libelle
+            // $activity->setStatus($statusRepository->findOneBy(array('codeActivity' => 'ANNU')));
+            $em->persist($activity);
             $em->flush();
-        }
+            return $this->redirectToRoute('home');
+           }
 
-        return $this->redirectToRoute('home');
-   
+        return $this->render('activity/_delete_form.html.twig',[
+            'activity' => $activity                 
+         ]);
      }
 
     //   /**

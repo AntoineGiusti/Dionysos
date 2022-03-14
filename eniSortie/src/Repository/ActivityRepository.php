@@ -49,7 +49,7 @@ class ActivityRepository extends ServiceEntityRepository
     }
 
 
-    
+   
     public function filterSearch($activity)
     {   
       
@@ -92,7 +92,7 @@ class ActivityRepository extends ServiceEntityRepository
 
        if($search != null){
            $qb->andWhere('builder.name LIKE :search')
-           ->setParameter('search', '%'.$search . '%');
+           ->setParameter('search', '%'.$search. '%');
        }
 
        return $qb->getQuery()->getResult();
