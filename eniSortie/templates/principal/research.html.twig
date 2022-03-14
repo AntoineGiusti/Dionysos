@@ -47,7 +47,21 @@
                              
                              </td>
                             <td>{{ activity.organizer.firstname }} {{ activity.organizer.lastname }}</td>
-                            <td>ACTIONS ?</td>
+                            <td>
+
+                            {%  if app.user %}
+                                <a href="{{ path('show_detail_activity', {id:activity.id}) }}" alt="Afficher la sortie">Afficher </a>
+
+
+                                <!--Modifier, Publier, Supprimer la sortie si Id User = Id Organisateur-->
+                                {%  if  app.user.id == activity.organizer.id %}
+                                    <a href="{{ path('app_activity_edit', {id:activity.id}) }}" alt="Modifier la sortie">Modifier </a>
+                                {%  endif %}
+
+
+                            {%  endif  %}
+
+                            </td>
                         </tr>
                     {% else %}
                         <tr>
