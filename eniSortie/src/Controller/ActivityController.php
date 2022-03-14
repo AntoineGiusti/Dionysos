@@ -28,7 +28,7 @@ class ActivityController extends AbstractController
      */
     public function new(Request $request, ActivityRepository $activityRepository): Response
     {
-       
+        
         $activity = new Activity();
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
@@ -148,6 +148,8 @@ class ActivityController extends AbstractController
         ]);
    
      }
+
+     
 
     
 }
