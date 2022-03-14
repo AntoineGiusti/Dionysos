@@ -25,17 +25,23 @@
                         <label class="form-check-label text-dark" for="flexSwitchCheckDefault">Sortie dont je suis l'organisateur / trice</label>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input btn-info" type="checkbox" id="flexSwitchCheckDefault" {{ activity.registerMeActivity}}>
+                        <input class="form-check-input btn-info" type="checkbox" id="flexSwitchCheckDefault" 
+                        {# {{ activity.registerMeActivity}} #}
+                        >
                         <label class="form-check-label text-dark" for="flexSwitchCheckDefault">Sortie auxquelles je suis inscrit / e</label>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input btn-info" type="checkbox" id="flexSwitchCheckDefault" {{ activity.unreriterMeActivity}}>
+                        <input class="form-check-input btn-info" type="checkbox" id="flexSwitchCheckDefault"
+                         {# {{ activity.unreriterMeActivity}} #}
+                         >
                         <label class="form-check-label text-dark" for="flexSwitchCheckDefault">Sorties auxquelles je ne suis pas inscrit / e</label>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input btn-info" type="checkbox" id="flexSwitchCheckDefault" {{ activity.pastActivity}}>
+                        <input class="form-check-input btn-info" type="checkbox" id="flexSwitchCheckDefault"
+                         {# {{ activity.pastActivity}} #}
+                         >
                         <label class="form-check-label text-dark" for="flexSwitchCheckDefault">Sorties passées</label>
-                    </div> #}
+                    </div> 
                 </div>
                 <div class="row g-2">
                     <div class="col-md-10">
@@ -129,6 +135,10 @@
                                 <!--Modifier, Publier, Supprimer la sortie si Id User = Id Organisateur-->
                                 {%  if  app.user.id == activity.organizer.id %}
                                     <a href="{{ path('app_activity_edit', {id:activity.id}) }}" alt="Modifier la sortie">Modifier </a>
+                                {%  endif %}
+
+                                 {%  if  app.user.id == activity.organizer.id %}
+                                    <a href="{{ path('app_activity_delete', {id:activity.id}) }}" alt="Supprimer la sortie">Supprimer </a>
                                 {%  endif %}
 
 
