@@ -110,7 +110,7 @@ class SearchData
     /**
      * @param Campus $campus
      */
-    public function setCampuses(?Campus $campus): void
+    public function setCampus(?Campus $campus): void
     {
         $this->campus = $campus;
     }

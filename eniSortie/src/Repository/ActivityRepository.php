@@ -66,8 +66,6 @@ class ActivityRepository extends ServiceEntityRepository
         }
     }
 
-    //INSTALLER LE BUNDLE composer require knplabs/knp-paginator-bundle POUR LA MISE EN PAGE
-
     /**
      * Récupère les produits en lien avec une recherche
      * @return PaginationInterface
@@ -75,85 +73,62 @@ class ActivityRepository extends ServiceEntityRepository
 
     public function findSearch(SearchData $search): PaginationInterface
     {
+        $user = $this->security->getUser();
         $query = $this
             ->createQueryBuilder('a')
             ->select('c', 'a')
             //Pour récupérer la liste des campus
-            ->join('a.campus', 'c');
+            ->innerJoin('a.campus', 'c')
+            ->leftJoin('a.organizer', 'o');
 
-
-        //LA BARRE DE RECHERCHE FONCTIONNE///////////////////////////////////
-        if (!empty($search->q)) {
-            $query = $query
+        if (!empty($search->getQ())) {
+            $query
                 //Le nom de notre activité soit comme le paramètre q
                 ->andWhere('a.name LIKE :q')
-                ->setParameter('q', "%{$search->q}%");
+                ->setParameter('q', "%{$search->getQ()}%");
         }
-        /////////////////////////////////////////////////////////////////////
 
-
-        //LA RECHERCHE PAR CAMPUS FONCTIONNE/////////////////////////////////
-        if (!empty($search->campuses)) {
-            $query = $query
-                ->andWhere('c.id IN (:campuses)')
-                ->setParameter('campuses', $search->campuses);
+        if (!empty($search->getCampus())) {
+            $query
+                ->andWhere('c.id = :campuses')
+                ->setParameter('campuses', $search->getCampus());
         }
-        /////////////////////////////////////////////////////////////////////
 
-
-
-        //ENTRE DATE 1 et DATE 2 FONCTIONNE /////////////////////////////////////
-        if (!empty($search->date1)) {
-            $query = $query
-                ->andWhere('a.startDate >= (:date1) ')
-                ->setParameter('date1', $search->date1);
+        if (!empty($search->getDate1())) {
+            $query
+                ->andWhere('a.startDate >= :date1 ')
+                ->setParameter('date1', $search->getDate1());
         }
-        if (!empty($search->date2)) {
-            $query = $query
-                ->andWhere('a.startDate <= (:date2) ')
-                ->setParameter('date2', $search->date2);
+        if (!empty($search->getDate2())) {
+            $query
+                ->andWhere('a.startDate <= :date2 ')
+                ->setParameter('date2', $search->getDate2());
         }
-        ///////////////////////////////////////////////////////////////////////////
 
-
-        //SI ORGANISATEUR ////////////////////////////////////////////////////////
-        if (!empty($search->isOrganizer)) {
-            $user = $this->security->getUser();
-            $query = $query
+        if ($search->getIsOrganizer()) {
+            $query
                 ->andWhere('a.organizer = :organizer')
                 ->setParameter(':organizer', $user);
         }
-        /////////////////////////////////////////////////////////////////////////
 
-        //INSCRIT A L'ACTIVITE////////////////////////////////////////////////////////////
+            if($search->getIsRegistered()){
+                $query
+                    ->andWhere(':user MEMBER OF a.participant')
+                    ->setParameter('user', $user);
+            }
 
-        if(!empty($search->isRegistered)){
-            $user=$this->security->getUser();
-            $query = $query
-                ->orWhere(':user MEMBER OF a.participant')
-                ->setParameter('user', $user);
-        }
-        /////////////////////////////////////////////////////////////////////////////////
-        ///
+            if($search->getIsNotRegistered()){
+                $query
+                    ->andWhere(':user NOT MEMBER OF a.participant')
+                    ->setParameter('user',$user);
+            }
 
-        //PAS INSCRIT A L'ACTIVITE//////////////////////////////////////////////////////
-        if(!empty($search->isNotRegistered)){
-            $user=$this->security->getUser();
-            $query=$query
-                ->orWhere(':user NOT MEMBER OF a.participant')
-                ->setParameter('user',$user);
-        }
-        ///////////////////////////////////////////////////////////////////////////////
-
-        //ACTIVITES PASSEES///////////////////////////////////////////////////////////
 
         if(!empty($search->passedActivity)){
-            $query=$query
+            $query
                 ->andWhere('a.startDate <= :date ')
                 ->setParameter(':date',  new \DateTime);
         }
-        /////////////////////////////////////////////////////////////////////////////
-
             $query = $query->getQuery();
             return $this->paginator->paginate(
                 $query,
