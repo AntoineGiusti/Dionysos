@@ -25,6 +25,7 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         if($this->getUser()){
+            $this->addFlash("Bienvenue", "Vous etes connectés sur ENI Sortie");
             return $this->redirectToRoute('home');
         }
 
