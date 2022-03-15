@@ -18,9 +18,3 @@ class FrontController extends AbstractController
         ]);
     }
 }
-
-
-
-// fonction singIn
-
-// 
