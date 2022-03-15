@@ -129,10 +129,9 @@ class ParticipantController extends AbstractController
         //a gérer mieux en BDD avec la gestion des Status !
         $dateNow = new \DateTime('now');        
         $open = $activity->getStatus('Ouverte');
-        $inProgress = $activity->getStatus('Activité en cours');
 
         
-        if($nbParticipant <= $activity->getNbRegistration() && $dateNow > $activity->getRegistrationDeadline() && $open && $inProgress){
+        if($nbParticipant <= $activity->getNbRegistration() && $dateNow > $activity->getRegistrationDeadline() && $open){
             
             $activity->addParticipant($this->getUser());
         }

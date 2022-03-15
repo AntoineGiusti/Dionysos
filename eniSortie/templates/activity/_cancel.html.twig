@@ -1,0 +1,58 @@
+{% extends 'model.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+    Delete Activity
+{% endblock %}
+
+{% block main %}
+    {% include('navbar.html.twig') %}
+    {% block body %}
+        <div class="container-xl px-4 mt-4">
+
+            <hr class="mt-0 mb-4">
+            <div class="row">
+                <div class="col-xl-4">
+                    <img class="img-fluid" src="{{ asset ('img/yesOrNo.jpg') }}" alt="Icon">
+                </div>
+
+                <div class="col-xl-8">
+                    <div class="card mb-4">
+                        <div class="card-header"><h3>Annuler l'activité</h3></div>
+                        <div class="card-body">
+
+                            <p>Nom de l'activité : {{ activity.name }} </p>
+                            <p>Date de l'activité : {{ activity.startDate | date('Y-m-d H:i:s') }} </p>
+                            <p>Campus : {{ activity.campus.name }} </p>
+                            <p>Lieu : {{ activity.location.name }} </p>
+
+                            <form method="post">
+                                <div>
+                                    <label for="motif">Motif :</label>
+                                    <textarea class="form-control" name="motif" cols='20' rows='5'></textarea>
+                                    <br>
+                                    <div>
+                                        <!--Annuler la sortie-->
+                                        <button type="submit" name="delete" class="btn btn-danger"
+                                                action="{{ path('app_activity_delete', {id:activity.id}) }}">Enregistrer
+                                        </button>
+                                        <!--Ne pas enregistrer l'annulation et renvoi sur la page d'accueil-->
+                                        <button type="submit" name="annuler" class="btn btn-dark"
+                                                action="{{ path('home') }}">
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    {% endblock %}
+    {% include('footer.html.twig') %}
+{% endblock %}

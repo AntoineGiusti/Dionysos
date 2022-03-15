@@ -108,7 +108,7 @@ class ActivityController extends AbstractController
             return $this->redirectToRoute('home');
            }
 
-        return $this->render('activity/_delete_form.html.twig',[
+        return $this->render('activity/_cancel.html.twig',[
             'activity' => $activity                 
          ]);
      }
