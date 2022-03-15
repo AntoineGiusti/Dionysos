@@ -63,12 +63,7 @@ class ActivityType extends AbstractType
                 'label'=>'Campus',
                 'class'=>Campus::class,
                 'choice_label'=>'name'
-
             ]);
-
-            
-
-            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -7,7 +7,7 @@ use App\Repository\StatusRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
-Class StatusChangeServ
+Class StatusChange
 {
 
     private $activityRepository;
