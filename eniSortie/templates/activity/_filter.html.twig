@@ -12,12 +12,15 @@
                 <p>Le nom de la sortie contient : </p>
                 {{ form_row(form.q) }}
                 <p>Le campus : </p>
-                {{ form_row(form.campuses) }}
+                {{ form_row(form.campus) }}
 
                 {{ form_row(form.isOrganizer) }}
 
                 {{ form_row(form.isRegistered) }}
 
+                {{ form_row(form.isNotRegistered) }}
+
+                {{ form_row(form.passedActivity) }}
 
                 <p>Entre {{ form_row(form.date1) }} et {{ form_row(form.date2) }}</p>
 

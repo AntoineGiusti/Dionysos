@@ -112,7 +112,6 @@ class ParticipantController extends AbstractController
         
     ]);
 
-
  }
 
     // S'inscrire à une activité
