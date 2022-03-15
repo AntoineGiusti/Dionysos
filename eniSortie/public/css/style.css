@@ -30,6 +30,19 @@
 }
 
 
+/*** FILTRE DE LA RECHERCHE ***/
+.filter {
+    display: block;
+    position: sticky;
+    top: 20px;
+}
+
+
+
+
+
+
+
 /*** Button ***/
 .btn {
     transition: .5s;

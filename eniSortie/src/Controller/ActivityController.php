@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Activity;
-use App\Entity\Participant;
 use App\Form\ActivityType;
+use App\Form\FilterSearchType;
+use App\Form\model\FilterSearch;
+use App\Form\SearchForm;
 use App\Repository\ActivityRepository;
 use App\Repository\CampusRepository;
 use App\Repository\ParticipantRepository;
-use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +22,29 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ActivityController extends AbstractController
 {
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function index(CampusRepository $campusRepository, ActivityRepository $activityRepository, Request $request): Response
+    {
+
+        // Je vais récupérer l'ensemble des activités
+        //Il faudra créer la méthode findSearch() qui permettra de récupérer les produits liés à une recherche
+
+        $data=new SearchData();
+        //Définir page avec 1 par défaut
+        $data->page=$request->get('page', 1);
+        $form= $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+
+
+        $activities = $activityRepository->findSearch($data);
+        return $this->render('index.html.twig',[
+            'activities'=> $activities,
+            'form'=>$form->createView()
+    ]);
+    }
 
     /**
      * @Route("/new", name="new_activity")
@@ -46,40 +69,11 @@ class ActivityController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/", name="home")
-    //  */
-    // public function show(CampusRepository $campusRepository, ActivityRepository $activityRepository): Response
-    // {
-    //     $activityList = $activityRepository->findAll();
-    //     $campus = $campusRepository->findAll();
-
-    //     $createSearchType = new ModelSearchType();
-    //     $form = $this->createForm(EventSearchType::class, $createSearchType);
-    //     $form->handleRequest($request);
-
-    //     if($form->isSubmitted()&& $form->isValid()){
-    //         $data = $form->getData();
-    //         $user = $this->getUser();
-    //         $activityList = $activityRepository->searchByFilter($data, $user);
-
-    //     }
-        
-    //     return $this->render('home',[
-    //         'activity' => $activityList,
-    //         'campus'=>$campus,
-    //         'formulaire' => $form->createView(),
-            
-    //     ]);
-
-    // }
-
     /**
      * @Route("/edit/{id}", name="app_activity_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Activity $activity): Response
     {
-       
         $activity ;
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
@@ -103,7 +97,7 @@ class ActivityController extends AbstractController
     public function cancel(Request $request, Activity $activity, StatusRepository $statusRepository, EntityManagerInterface $em): Response
     {
          
-       
+
         if ($request->get('motif')) {
             $activity->setActivityDescription($request->get('motif'));
             // ligne ci dessous a modifier quand on aura geré les status. codeActivity est une colonne en plus dans la BDD pour ne pas
@@ -118,25 +112,6 @@ class ActivityController extends AbstractController
             'activity' => $activity                 
          ]);
      }
-
-    //   /**
-    //  * @Route("/home", name="filtre_activity")
-    //  */
-    //  public function researchByStatusId(ActivityRepository $activityRepository, StatusRepository $statusRepository): Response
-    //  {
-    //     //  $activity = $activityRepository->findOneByStatus('8');
-    //     $activity = $activityRepository->findBy(array('status'=>$statusRepository->find('8')));
-    //     // dd($activity);
-        
- 
-    //      return $this->render('research.html.twig');
-    
-    //   }
-    
-   
-
-
-    
 
        /**
      * @Route("/showDetailActivity/{id}", name="show_detail_activity")     

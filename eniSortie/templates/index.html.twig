@@ -1,0 +1,76 @@
+{% extends 'model.html.twig' %}
+
+{% block title %}
+
+    {{ titre }} | {{ parent() }}
+
+{% endblock %}
+
+{% block main %}
+
+    {% include('navbar.html.twig') %}
+    {% include('header.html.twig') %}
+
+    {% block body %}
+
+        <div class="container-xl px-4 mt-4">
+            <div class="row">
+
+                {#        La recherche avec les filtres #}
+                <div class="col-xl-2">
+                    {% include 'activity/_filter.html.twig' with {form:form}  only %}
+                </div>
+
+                {#        Notre liste d'activités : #}
+                <div class="col-xl-10">
+                    <!-- partie affichage liste d'activitees -->
+                    <div class="card mb-4">
+                        <div class="card-header"><h3>Liste des sorties</h3></div>
+                        <div class="card-body">
+                            <table class="table table-striped table-hover table-responsive">
+                                <thead>
+                                <tr>
+                                    <th>Nom de la sortie</th>
+                                    <th>Date de la sortie</th>
+                                    <th>Clôture</th>
+                                    <!-- Il s'agit du nombre de place total, il faudra ensuite indiquer le nb d'inscrits/nb places-->
+                                    <th>Nombre de place</th>
+                                    <th>Etat</th>
+                                    <th>Inscrit</th>
+                                    <th>Organisateur</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for activity in activities %}
+                                    {% include 'activity/_card.html.twig' with {activity : activity} only %}
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div>
+            {#                La pagination des activités #}
+            {{ knp_pagination_render(activities) }}
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+
+
+
+    {% endblock %}
+
+
+    {% include('footer.html.twig') %}
+
+{% endblock %}

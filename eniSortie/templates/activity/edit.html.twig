@@ -1,11 +1,15 @@
 {% extends 'model.html.twig' %}
 {% block title %}
 {{ parent() }}
-Edit Activity{% endblock %}
+
+
+{% endblock %}
+
 
 {% block main %}
-    
-    
+    {% include('navbar.html.twig') %}
+
+
     {# fonctionne mais a voir avec les liens du tableau d'activités #}
     {% block body %}
         <h1 class="text-align-center">Edit Activity</h1>
@@ -35,6 +39,8 @@ Edit Activity{% endblock %}
        
 
     {% endblock %}
+
+    {% include('footer.html.twig') %}
 
     {# {{ include('activity/_form.html.twig') }} #}
 
