@@ -128,13 +128,8 @@
                             <td>{{ activity.participant | length }}/{{activity.nbRegistration}}</td>
                             <td>{{ activity.Status.wording }}</td>
                             <td>
-<<<<<<< HEAD
                            
-                             <a class="form-check-input btn-success" name="registed" href="{{path ('app_isRegeisted', {id:activity.id})}}" type="checkbox" id="flexSwitchCheckDefault">s'inscrire</a>
-=======
-
-                             <a class="form-check-input btn-info" name="registed" href="{{path ('app_isRegisted', {id:activity.id})}}" type="checkbox" id="flexSwitchCheckDefault">s'inscrire</a>
->>>>>>> dbc5acfad91068695abab37cb04927a13a4da5dd
+                             <a class="form-check-input btn-success" name="registed" href="{{path ('app_isRegeisted', {id:activity.id} , 'app_isUnSuscribe' {id:activity.id})}}">s'inscrire / se désinscrire</a>
                              
                              
                              </td>

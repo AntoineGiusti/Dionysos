@@ -3,13 +3,16 @@
                     <td>{{ activity.startDate ? activity.startDate|date('d-m-Y H:i:s') : '' }}</td>
                     <td>{{ activity.registrationDeadline ? activity.registrationDeadline|date('d-m-Y') : '' }}</td>
                     <!-- Il s'agit du nombre d'inscrits / nombre de place -->
-                    <td>  {{ activity.participant | length }} / {{ activity.nbRegistration }}</td>
+                    <td>  {{ activity.participant | length +1 }} / {{ activity.nbRegistration }}</td>
                     <td>{{ activity.Status.wording }}</td>
 
                     <td>
                         {%  if  app.user.id != activity.organizer.id %}
-                            <a class="form-check-input btn-info" name="registed" href="{{path ('app_isRegisted', {id:activity.id})}}" type="checkbox" id="flexSwitchCheckDefault">s'inscrire</a>
+                            <a class="form-check-input btn-success" name="suscribe" href="{{path ('app_suscribe', {id:activity.id})}},">s'inscrire</a><br>
                         {%  endif %}
+                        {% if app.user.id != activity.organizer.id %}
+                        <a class="form-check-input btn-danger" name="unSuscribe" href="{{path ('app_unSuscribe', {id:activity.id})}}">se desinscrire</a>
+                        {% endif %}
                     </td>
                     <td>{{ activity.organizer.firstname }} {{ activity.organizer.lastname }}</td>
 
