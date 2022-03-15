@@ -123,6 +123,13 @@ class ParticipantController extends AbstractController
         $activity = $activityRepository->find($id);
         //dd($activity);
         $activity->addParticipant($this->getUser());
+        $this->date = new \DateTime('now');
+
+        // if($activity->getParticipant() <= $activity->getNbRegistration() && $activity->getStartDate( $this->date = new \DateTime('now'))){
+        //     $activity->addParticipant($this->getUser());
+        // }
+
+
         $em->persist($activity);
         $em ->flush();
     
