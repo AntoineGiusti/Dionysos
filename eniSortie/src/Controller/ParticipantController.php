@@ -127,19 +127,11 @@ class ParticipantController extends AbstractController
         $nbParticipant = $activity->getParticipant()->count();
 
         //a gérer mieux en BDD avec la gestion des Status !
-<<<<<<< HEAD
         $dateNow = new \DateTime();      
         //'code' => 'OPEN' appelle un objet dans une nouvelle colonne de l'entité status.  
         $status = $statusRepository->findOneBy(['code' => 'OPEN']);         
       
         if($nbParticipant <= $activity->getNbRegistration() && $activity->getStatus() == $status){
-=======
-        $dateNow = new \DateTime('now');        
-        $open = $activity->getStatus('Ouverte');
-
-        
-        if($nbParticipant <= $activity->getNbRegistration() && $dateNow > $activity->getRegistrationDeadline() && $open){
->>>>>>> 7a14b4a1da1ceab5410262f0ae529df5aaa60d6b
             
             $activity->addParticipant($this->getUser()); 
         }

@@ -7,7 +7,7 @@ use App\Repository\StatusRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
-Class StatusChangeServ
+Class StatusChange
 {
 
     private $activityRepository;
@@ -30,6 +30,8 @@ Class StatusChangeServ
             $thisDay = new DateTime();
             // récup liste d'activités
             $activityList = $this->activityRepository->findAll();
+            
+           
 
         foreach ($activityList as $activity)
 
@@ -37,7 +39,19 @@ Class StatusChangeServ
             $registrationDeadLine = $activity->getRegistrationDeadline();
             $activityDuration = $activity->getActivityDuration();
             $nbRegistration = $activity->getNbRegistration();
+
     }
+
+    
+    
+       
+       
+
+
+        
+
+
+   
 
 
 

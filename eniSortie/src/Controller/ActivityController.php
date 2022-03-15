@@ -23,6 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActivityController extends AbstractController
 {
 
+
     /**
      * @Route("/", name="home")
      */
@@ -126,6 +127,8 @@ class ActivityController extends AbstractController
         ]);
    
      }
+
+     
 
      
 
