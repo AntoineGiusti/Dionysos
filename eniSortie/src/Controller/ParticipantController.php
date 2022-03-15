@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Repository\ActivityRepository;
 use App\Repository\ParticipantRepository;
+use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -119,23 +120,21 @@ class ParticipantController extends AbstractController
      *  @Route("/suscribe/{id}", name="app_suscribe")
      */
 
-    public function suscribe($id, ActivityRepository $activityRepository,EntityManagerInterface $em)
+    public function suscribe($id, ActivityRepository $activityRepository,EntityManagerInterface $em, StatusRepository $statusRepository)
     {
 
         $activity = $activityRepository->find($id);
-        //dd($activity);
-       // $activity->addParticipant($this->getUser());
+        
         $nbParticipant = $activity->getParticipant()->count();
 
         //a gérer mieux en BDD avec la gestion des Status !
-        $dateNow = new \DateTime('now');        
-        $open = $activity->getStatus('Ouverte');
-        $inProgress = $activity->getStatus('Activité en cours');
-
-        
-        if($nbParticipant <= $activity->getNbRegistration() && $dateNow > $activity->getRegistrationDeadline() && $open && $inProgress){
+        $dateNow = new \DateTime();      
+        //'code' => 'OPEN' appelle un objet dans une nouvelle colonne de l'entité status.  
+        $status = $statusRepository->findOneBy(['code' => 'OPEN']);         
+      
+        if($nbParticipant <= $activity->getNbRegistration() && $activity->getStatus() == $status){
             
-            $activity->addParticipant($this->getUser());
+            $activity->addParticipant($this->getUser()); 
         }
 
 
