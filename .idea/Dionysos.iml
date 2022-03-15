@@ -141,6 +141,8 @@
       <excludeFolder url="file://$MODULE_DIR$/eniSortie/vendor/doctrine/dbal" />
       <excludeFolder url="file://$MODULE_DIR$/eniSortie/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/eniSortie/vendor/symfony/apache-pack" />
+      <excludeFolder url="file://$MODULE_DIR$/eniSortie/vendor/knplabs/knp-components" />
+      <excludeFolder url="file://$MODULE_DIR$/eniSortie/vendor/knplabs/knp-paginator-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

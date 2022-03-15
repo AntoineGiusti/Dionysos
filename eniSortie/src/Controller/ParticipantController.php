@@ -11,6 +11,7 @@ use App\Repository\ActivityRepository;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -87,7 +88,6 @@ class ParticipantController extends AbstractController
         
     }
 
-    
 
     /**
      * @Route("/participantList", name="participantList")
@@ -111,21 +111,49 @@ class ParticipantController extends AbstractController
         
     ]);
 
-
  }
 
+    // S'inscrire à une activité
     /**
-     *  @Route("/{id}", name="app_isRegeisted")
+     *  @Route("/suscribe/{id}", name="app_suscribe")
      */
 
-    public function isRegisted($id, Request $request, ActivityRepository $activityRepository,EntityManagerInterface $em)
+    public function suscribe($id, ActivityRepository $activityRepository,EntityManagerInterface $em)
     {
+
         $activity = $activityRepository->find($id);
         //dd($activity);
-        $activity->addParticipant($this->getUser());
+       // $activity->addParticipant($this->getUser());
+        $nbParticipant = $activity->getParticipant()->count();
+
+        //a gérer mieux en BDD avec la gestion des Status !
+        $dateNow = new \DateTime('now');        
+        $open = $activity->getStatus('Ouverte');
+        $inProgress = $activity->getStatus('Activité en cours');
+
+        
+        if($nbParticipant <= $activity->getNbRegistration() && $dateNow > $activity->getRegistrationDeadline() && $open && $inProgress){
+            
+            $activity->addParticipant($this->getUser());
+        }
+
+
         $em->persist($activity);
         $em ->flush();
     
         return $this->redirectToRoute('home');
     }
+        /**
+         *  @Route("/unsuscribe/{id}", name="app_unSuscribe")
+         */
+
+        public function unSuscribe($id, ActivityRepository $activityRepository,EntityManagerInterface $em)
+        {
+            $activity = $activityRepository->find($id);
+            //dd($activity);
+            $activity->removeParticipant($this->getUser());
+            $em->flush();
+        
+            return $this->redirectToRoute('home');
+        }
 }

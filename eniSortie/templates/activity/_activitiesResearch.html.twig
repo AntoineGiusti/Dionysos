@@ -1,0 +1,37 @@
+                <tr>
+                    <td>{{ activity.name }}</td>
+                    <td>{{ activity.startDate ? activity.startDate|date('d-m-Y H:i:s') : '' }}</td>
+                    <td>{{ activity.registrationDeadline ? activity.registrationDeadline|date('d-m-Y') : '' }}</td>
+                    <!-- Il s'agit du nombre d'inscrits / nombre de place -->
+                    <td>  {{ activity.participant | length +1 }} / {{ activity.nbRegistration }}</td>
+                    <td>{{ activity.Status.wording }}</td>
+
+                    <td>
+
+{#                        {%  if  app.user.id != activity.organizer.id %}#}
+{#                            <a class="form-check-input btn-info" name="registed" href="{{path ('app_isRegisted', {id:activity.id})}}" type="checkbox" id="flexSwitchCheckDefault">s'inscrire</a>#}
+{#                        {%  endif %}#}
+
+                        {%  if  app.user.id != activity.organizer.id %}
+                            <a class="form-check-input btn-success" name="suscribe" href="{{path ('app_suscribe', {id:activity.id})}},">s'inscrire</a><br>
+                        {%  endif %}
+                        {% if app.user.id != activity.organizer.id %}
+                        <a class="form-check-input btn-danger" name="unSuscribe" href="{{path ('app_unSuscribe', {id:activity.id})}}">se desinscrire</a>
+                        {% endif %}
+
+                    </td>
+                    <td>{{ activity.organizer.firstname }} {{ activity.organizer.lastname }}</td>
+
+                    <td>
+                        {%  if app.user %}
+                            <a href="{{ path('show_detail_activity', {id:activity.id}) }}" alt="Afficher la sortie">Afficher </a>
+                            <!--Modifier, Publier, Supprimer la sortie si Id User = Id Organisateur-->
+                            {%  if  app.user.id == activity.organizer.id %}
+                                <a href="{{ path('app_activity_edit', {id:activity.id}) }}" alt="Modifier la sortie">Modifier </a>
+                                <a href="{{ path('app_activity_delete', {id:activity.id}) }}" alt="Supprimer la sortie">Supprimer </a>
+
+                            {%  endif %}
+                        {%  endif  %}
+                    </td>
+                </tr>
+
