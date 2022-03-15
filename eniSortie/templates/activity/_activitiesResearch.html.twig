@@ -2,15 +2,13 @@
                     <td>{{ activity.name }}</td>
                     <td>{{ activity.startDate ? activity.startDate|date('d-m-Y H:i:s') : '' }}</td>
                     <td>{{ activity.registrationDeadline ? activity.registrationDeadline|date('d-m-Y') : '' }}</td>
-                    <!-- Il s'agit du nombre de place total, il faudra ensuite indiquer le nb d'inscrits/nb places-->
-
-                    <td>  / {{ activity.nbRegistration }}</td>
+                    <!-- Il s'agit du nombre d'inscrits / nombre de place -->
+                    <td>  {{ activity.participant | length }} / {{ activity.nbRegistration }}</td>
                     <td>{{ activity.Status.wording }}</td>
 
                     <td>
                         {%  if  app.user.id != activity.organizer.id %}
-                            <input type="checkbox" id="inscription" name="inscription">
-                            <label for="inscription">Inscrit.e</label>
+                            <a class="form-check-input btn-info" name="registed" href="{{path ('app_isRegisted', {id:activity.id})}}" type="checkbox" id="flexSwitchCheckDefault">s'inscrire</a>
                         {%  endif %}
                     </td>
                     <td>{{ activity.organizer.firstname }} {{ activity.organizer.lastname }}</td>
@@ -21,6 +19,8 @@
                             <!--Modifier, Publier, Supprimer la sortie si Id User = Id Organisateur-->
                             {%  if  app.user.id == activity.organizer.id %}
                                 <a href="{{ path('app_activity_edit', {id:activity.id}) }}" alt="Modifier la sortie">Modifier </a>
+                                <a href="{{ path('app_activity_delete', {id:activity.id}) }}" alt="Supprimer la sortie">Supprimer </a>
+
                             {%  endif %}
                         {%  endif  %}
                     </td>

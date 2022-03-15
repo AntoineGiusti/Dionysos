@@ -44,23 +44,25 @@
                                 <tbody>
 
                                 {% for activity in activities %}
-                                    {% include 'activity/_card.html.twig' with {activity : activity} only %}
+                                    {% include 'activity/_activitiesResearch.html.twig' with {activity : activity} only %}
                                 {% endfor %}
 
                                 </tbody>
                             </table>
+                            <div>
+                                {#                La pagination des activités #}
+                                {{ knp_pagination_render(activities) }}
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
 
 
-        <div>
-            {#                La pagination des activités #}
-            {{ knp_pagination_render(activities) }}
-        </div>
+
         </div>
         </div>
         </div>

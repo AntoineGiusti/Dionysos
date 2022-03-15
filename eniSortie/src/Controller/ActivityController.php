@@ -30,7 +30,7 @@ class ActivityController extends AbstractController
     {
 
         // Je vais récupérer l'ensemble des activités
-        //Il faudra créer la méthode findSearch() qui permettra de récupérer les produits liés à une recherche
+        //La méthode findSearch() qui peremet de récupérer les produits liés à une recherche
 
         $data=new SearchData();
         //Définir page avec 1 par défaut
@@ -94,7 +94,7 @@ class ActivityController extends AbstractController
     /**
      * @Route("/delete/{id}", name="app_activity_delete")     
      */
-    public function cancel(Request $request, Activity $activity, StatusRepository $statusRepository, EntityManagerInterface $em): Response
+    public function cancel(Request $request, Activity $activity, EntityManagerInterface $em): Response
     {
          
 
