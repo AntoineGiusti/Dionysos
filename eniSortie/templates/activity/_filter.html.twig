@@ -1,11 +1,8 @@
 {% extends 'model.html.twig' %}
 
-
 {% block main %}
 
     {% block body %}
-
-
 
         {{ form_start(form , {attr:{class: 'filter'}}) }}
 
@@ -27,14 +24,9 @@
                 <button type="submit" class="btn btn-primary w-100">Filtrer</button>
                 </div>
 
-
         </div>
 
-
-
         {{ form_end(form) }}
-
-
 
 
     {% endblock %}

@@ -113,8 +113,9 @@ class ParticipantController extends AbstractController
 
  }
 
+    // S'inscrire à une activité
     /**
-     *  @Route("/{id}", name="app_isRegeisted")
+     *  @Route("/{id}", name="app_isRegisted")
      */
 
     public function isRegisted($id, Request $request, ActivityRepository $activityRepository,EntityManagerInterface $em)

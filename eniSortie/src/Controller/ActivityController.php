@@ -94,7 +94,7 @@ class ActivityController extends AbstractController
     /**
      * @Route("/delete/{id}", name="app_activity_delete")     
      */
-    public function cancel(Request $request, Activity $activity, StatusRepository $statusRepository, EntityManagerInterface $em): Response
+    public function cancel(Request $request, Activity $activity, EntityManagerInterface $em): Response
     {
          
 

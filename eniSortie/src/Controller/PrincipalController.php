@@ -26,24 +26,4 @@ class PrincipalController extends AbstractController
          ]);
      }
 
-    //  /**
-    //  * @Route("/", name="home")
-    //  */
-    // public function registration(Activity $activity, ActivityRepository $activityRepository, EntityManagerInterface $em): Response
-    // {
-    //    $activity;
-    //    $isRegisted= $activity->getNbRegistration();
-    //    if($isRegisted)
-    //    {
-    //        $em->
-    //    }
-
-
-    //     return $this->render('principal/research.html.twig', [
-    //         'activities' => $activityRepository->findAll(),
-    //         'titre'=>'Liste des activités',
-    //     ]);
-    // }
-
-
 }
