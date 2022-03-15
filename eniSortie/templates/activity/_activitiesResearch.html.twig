@@ -7,9 +7,9 @@
                     <td>{{ activity.Status.wording }}</td>
 
                     <td>
-                        {%  if  app.user.id != activity.organizer.id %}
-                            <a class="form-check-input btn-info" name="registed" href="{{path ('app_isRegisted', {id:activity.id})}}" type="checkbox" id="flexSwitchCheckDefault">s'inscrire</a>
-                        {%  endif %}
+{#                        {%  if  app.user.id != activity.organizer.id %}#}
+{#                            <a class="form-check-input btn-info" name="registed" href="{{path ('app_isRegisted', {id:activity.id})}}" type="checkbox" id="flexSwitchCheckDefault">s'inscrire</a>#}
+{#                        {%  endif %}#}
                     </td>
                     <td>{{ activity.organizer.firstname }} {{ activity.organizer.lastname }}</td>
 

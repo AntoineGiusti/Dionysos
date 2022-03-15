@@ -113,26 +113,26 @@ class ParticipantController extends AbstractController
 
  }
 
-    // S'inscrire à une activité
-    /**
-     *  @Route("/{id}", name="app_isRegisted")
-     */
-
-    public function isRegisted($id, Request $request, ActivityRepository $activityRepository,EntityManagerInterface $em)
-    {
-        $activity = $activityRepository->find($id);
-        //dd($activity);
-        $activity->addParticipant($this->getUser());
-        $this->date = new \DateTime('now');
-
-        // if($activity->getParticipant() <= $activity->getNbRegistration() && $activity->getStartDate( $this->date = new \DateTime('now'))){
-        //     $activity->addParticipant($this->getUser());
-        // }
-
-
-        $em->persist($activity);
-        $em ->flush();
-    
-        return $this->redirectToRoute('home');
-    }
+//    // S'inscrire à une activité
+//    /**
+//     *  @Route("/{id}", name="app_isRegisted")
+//     */
+//
+//    public function isRegisted($id, Request $request, ActivityRepository $activityRepository,EntityManagerInterface $em)
+//    {
+//        $activity = $activityRepository->find($id);
+//        //dd($activity);
+//        $activity->addParticipant($this->getUser());
+//        $this->date = new \DateTime('now');
+//
+//        // if($activity->getParticipant() <= $activity->getNbRegistration() && $activity->getStartDate( $this->date = new \DateTime('now'))){
+//        //     $activity->addParticipant($this->getUser());
+//        // }
+//
+//
+//        $em->persist($activity);
+//        $em ->flush();
+//
+//        return $this->redirectToRoute('home');
+//    }
 }
