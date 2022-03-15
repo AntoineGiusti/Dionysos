@@ -1,44 +1,52 @@
 {% extends 'model.html.twig' %}
 
 {% block title %}
-{{ parent() }}
-New Activity{% endblock %}
+    {{ parent() }}
+    New Activity{% endblock %}
 
 
 
 {% block main %}
     {% include('navbar.html.twig') %}
-
-    
     {% block body %}
-<div class="row justify-content-center">
-    <div class="col-sm-10">
-        <h1 class="text-align-center">Create new Activity</h1>
-       <div class="container col-md-6 text-center">
-        {{ form_start(activity) }}
-       
-        {{ form_row(activity.name)}}
-        {{ form_row(activity.startDate)}}
-        {{ form_row(activity.activityDuration)}}
-        {{ form_row(activity.registrationDeadline)}}
-        
-        {{ form_row(activity.nbRegistration)}}
-        {{ form_row(activity.activityDescription)}}
-        {{ form_row(activity.location)}}
-        {{ form_row(activity.status)}}
-        {{ form_row(activity.campus)}}
-        {# {{ form_row(activity.Organizer)}} #}
-        {# {{ form_row(activity.participant)}} #}
-       
-        {{ form_widget(activity) }}
-        <div class="align-items-center">
-        <button type="submit" class="btn btn-dark">Ajouter !</button>
-       </div>
-       </div>
+        <div class="container-xl px-4 mt-4">
 
-        {{ form_end(activity) }}
-    </div>
-</div>
+            <hr class="mt-0 mb-4">
+            <div class="row">
+                <div class="col-xl-4">
+                    <img class="img-fluid" src="{{ asset ('img/team.jpg') }}" alt="Icon">
+                </div>
+
+                <div class="col-xl-8">
+                    <div class="card mb-4">
+                        <div class="card-header"><h3>Proposer une activité</h3></div>
+                        <div class="card-body">
+                            {{ form_start(activity) }}
+                            {{ form_row(activity.name) }}
+                            {{ form_row(activity.startDate) }}
+                            {{ form_row(activity.activityDuration) }}
+                            {{ form_row(activity.registrationDeadline) }}
+
+                            {{ form_row(activity.nbRegistration) }}
+                            {{ form_row(activity.activityDescription) }}
+                            {{ form_row(activity.location) }}
+                            {{ form_row(activity.status) }}
+                            {{ form_row(activity.campus) }}
+                            {# {{ form_row(activity.Organizer)}} #}
+                            {# {{ form_row(activity.participant)}} #}
+
+                            {{ form_widget(activity) }}
+                            <div class="align-items-center">
+                                <button type="submit" class="btn btn-dark">Ajouter !</button>
+                            </div>
+                        </div>
+
+                        {{ form_end(activity) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     {% endblock %}
 
