@@ -81,51 +81,52 @@ class ActivityRepository extends ServiceEntityRepository
             ->innerJoin('a.campus', 'c')
             ->leftJoin('a.organizer', 'o');
 
+        //Barre de recherche
         if (!empty($search->getQ())) {
-            $query
+            $query=$query
                 //Le nom de notre activité soit comme le paramètre q
                 ->andWhere('a.name LIKE :q')
                 ->setParameter('q', "%{$search->getQ()}%");
         }
 
         if (!empty($search->getCampus())) {
-            $query
+            $query=$query
                 ->andWhere('c.id = :campuses')
                 ->setParameter('campuses', $search->getCampus());
         }
 
         if (!empty($search->getDate1())) {
-            $query
+            $query=$query
                 ->andWhere('a.startDate >= :date1 ')
                 ->setParameter('date1', $search->getDate1());
         }
         if (!empty($search->getDate2())) {
-            $query
+            $query=$query
                 ->andWhere('a.startDate <= :date2 ')
                 ->setParameter('date2', $search->getDate2());
         }
 
         if ($search->getIsOrganizer()) {
-            $query
+            $query=$query
                 ->andWhere('a.organizer = :organizer')
                 ->setParameter(':organizer', $user);
         }
 
             if($search->getIsRegistered()){
-                $query
+                $query=$query
                     ->andWhere(':user MEMBER OF a.participant')
                     ->setParameter('user', $user);
             }
 
             if($search->getIsNotRegistered()){
-                $query
+                $query=$query
                     ->andWhere(':user NOT MEMBER OF a.participant')
                     ->setParameter('user',$user);
             }
 
 
         if(!empty($search->passedActivity)){
-            $query
+            $query=$query
                 ->andWhere('a.startDate <= :date ')
                 ->setParameter(':date',  new \DateTime);
         }
@@ -134,7 +135,7 @@ class ActivityRepository extends ServiceEntityRepository
                 $query,
                 $search->page,
                 //Nombre max d'activités affichés lors de la recherche
-                20,
+                5,
             );
         }
     }

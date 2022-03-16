@@ -1,0 +1,6 @@
+{% extends 'model.html.twig' %}
+
+{% block body %}
+    <h1>Erreur 404</h1>  <a href="{{ path('home') }}">Retourner à la page d'accueil</a>.
+    <img class="img-fluid w-100" src="{{ asset ('img/error404.jpg')}}" alt="Erreur 404" >
+{% endblock %}

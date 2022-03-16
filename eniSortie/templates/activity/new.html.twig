@@ -30,18 +30,13 @@
                             {{ form_row(activity.nbRegistration) }}
                             {{ form_row(activity.activityDescription) }}
                             {{ form_row(activity.location) }}
-                            {{ form_row(activity.status) }}
-                            {{ form_row(activity.campus) }}
-                            {# {{ form_row(activity.Organizer)}} #}
-                            {# {{ form_row(activity.participant)}} #}
-
-                            {{ form_widget(activity) }}
+                            
                             <div class="align-items-center">
                                 <button type="submit" class="btn btn-dark">Ajouter !</button>
                             </div>
                         </div>
 
-                        {{ form_end(activity) }}
+                        {{ form_end(activity, {'render_rest': false}) }}.
                     </div>
                 </div>
             </div>

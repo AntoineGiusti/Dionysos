@@ -37,45 +37,42 @@ class ParticipantController extends AbstractController
         /**
          * @var Participant $participant
          */
-        $participant= $this->getUser();
+        $participant = $this->getUser();
 
         $form = $this->createForm(ParticipantType::class, $this->getUser());
         $form->handleRequest($request);
-        $password=$form->get('password')->getData();
+        $password = $form->get('password')->getData();
 
-//        dd($form->isSubmitted());
+
         if ($form->isSubmitted() && $form->isValid())
 
          {
 
             /** @var UploadedFile $photoFile */
-             //Upload de l'image
+            //Upload de l'image
             $photoFile = $form->get('photo')->getData();
 
-            if ($photoFile) 
-            {
+            if ($photoFile) {
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
-                
+
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
 
                 //Déplace le fichier dans le dossier upload
-                try
-                {
+                try {
                     $photoFile->move(
                         $this->getParameter('photos_directory'),
                         $newFilename
                     );
-                } catch (FileException $e) 
-                    {
-                    }
-                    $participant->setPhotoFilename($newFilename);
-                    $em->persist($participant);
+                } catch (FileException $e) {
+                }
+                $participant->setPhotoFilename($newFilename);
+                $em->persist($participant);
             }
 
-            if($password){
+            if ($password) {
                 //Hacher le mot de passe, le set et le persist
-                $hashedPassword =$passwordHasher->hashPassword(
+                $hashedPassword = $passwordHasher->hashPassword(
                     $participant,
                     $password,
                 );
@@ -85,14 +82,17 @@ class ParticipantController extends AbstractController
             }
 
             $em->flush();
-            return $this->redirectToRoute('home');
-               
+
+            $this->addFlash('success', 'Votre profil a été modifié avec succès !');
+
+            return $this->redirectToRoute('update_participant');
+
         }
-            return $this->renderForm('participant/updateParticipant.html.twig', [
-                'formulaire' => $form,
-                'participant' => $participant,
-                ]);
-        
+        return $this->renderForm('participant/updateParticipant.html.twig', [
+            'formulaire' => $form,
+            'participant' => $participant,
+        ]);
+
     }
 
 
@@ -112,24 +112,28 @@ class ParticipantController extends AbstractController
      */
     public function showDetailParticipant(Participant $participant, ParticipantRepository $repo): Response
     {
-    return $this->render('participant/showDetailParticipant.html.twig', [
-        'participant' => $participant
-        
-        
-    ]);
-
- }
-
-    // S'inscrire à une activité
+        return $this->render('participant/showDetailParticipant.html.twig', [
+            'participant' => $participant
+        ]);
+    }
+    // S'inscrire à une activite
     /**
+<<<<<<< HEAD
      *  @Route("/suscribe/{id}", name="app_suscribe")     *  
      */
 
     public function suscribe($id ,ActivityRepository $activityRepository,EntityManagerInterface $em, ActivityServices $activityServices, StatusRepository $statusRepository)
+=======
+     * @Route("/suscribe/{id}", name="app_suscribe")
+     */
+
+    public function suscribe($id, ActivityRepository $activityRepository, EntityManagerInterface $em, StatusRepository $statusRepository)
+>>>>>>> fcc0d782a7c9a3449436c6da74dd1a810af8efdc
     {
         $activityServices->resetStatus();
 
         $activity = $activityRepository->find($id);
+<<<<<<< HEAD
         
         $activity->getParticipant()->count();
          
@@ -144,14 +148,52 @@ class ParticipantController extends AbstractController
         /**
          *  @Route("/unsuscribe/{id}", name="app_unSuscribe")
          */
+=======
 
-        public function unSuscribe($id, ActivityRepository $activityRepository,EntityManagerInterface $em)
-        {
-            $activity = $activityRepository->find($id);
-            //dd($activity);
-            $activity->removeParticipant($this->getUser());
+        $nbParticipant = $activity->getParticipant()->count();
+
+        //a gérer mieux en BDD avec la gestion des Status !
+
+        $dateNow = new \DateTime();
+        //'code' => 'OPEN' appelle un objet dans une nouvelle colonne de l'entité status.
+        $status = $statusRepository->findOneBy(['code' => 'OPEN']);
+
+        if ($nbParticipant <= $activity->getNbRegistration() && $activity->getStatus() == $status) {
+
+            $dateNow = new \DateTime('now');
+            $open = $activity->getStatus('Ouverte');
+
+>>>>>>> fcc0d782a7c9a3449436c6da74dd1a810af8efdc
+
+            if ($nbParticipant <= $activity->getNbRegistration() && $dateNow > $activity->getRegistrationDeadline() && $open) {
+
+                $activity->addParticipant($this->getUser());
+            }
+
+            $em->persist($activity);
             $em->flush();
-        
+
             return $this->redirectToRoute('home');
         }
+        return $this->redirectToRoute('home');
+    }
+    /**
+     *  @Route("/unsuscribe/{id}", name="app_unSuscribe")
+     */
+
+    public function unSuscribe($id, ActivityRepository $activityRepository,EntityManagerInterface $em)
+    {
+        $activity = $activityRepository->find($id);
+        //dd($activity);
+        $activity->removeParticipant($this->getUser());
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+
+
 }
+
+
+

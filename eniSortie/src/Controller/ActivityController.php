@@ -63,7 +63,11 @@ class ActivityController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($activity);
             $em->flush();
-           }
+            $this->addFlash('success', 'Votre activité a été crée avec succès !');
+            return $this->redirectToRoute('home');
+
+
+        }
 
         return $this->render('activity/new.html.twig', [
             //'activity' => $activity,
@@ -85,7 +89,9 @@ class ActivityController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($activity);
             $em->flush();
-           }
+            $this->addFlash('success', 'Votre activité a été modifiée avec succès !');
+            return $this->redirectToRoute('app_activity_edit', ['id' => $activity->getId()] );
+        }
 
         return $this->render('activity/edit.html.twig', [
             //'activity' => $activity,
@@ -94,7 +100,7 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="app_activity_delete")     
+     * @Route("/cancel/{id}", name="app_activity_cancel")
      */
     public function cancel(Request $request, Activity $activity, EntityManagerInterface $em): Response
     {
@@ -107,6 +113,7 @@ class ActivityController extends AbstractController
             // $activity->setStatus($statusRepository->findOneBy(array('codeActivity' => 'ANNU')));
             $em->persist($activity);
             $em->flush();
+            $this->addFlash('success', 'Votre activité a été annulée avec succès !');
             return $this->redirectToRoute('home');
            }
 
@@ -120,13 +127,11 @@ class ActivityController extends AbstractController
      */
     public function showDetailActivity( Activity $activity, ActivityRepository $activityRepository, ParticipantRepository $participantRepository): Response
     {
-         
+
         return $this->render('activity/showDetailActivity.html.twig', [
             'activity' => $activity
-            
-            
         ]);
-   
+
      }
 
      

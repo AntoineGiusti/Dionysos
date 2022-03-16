@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
         //Ici seulement pour tester la BDD
         //Le status dépend des heures de début et de fin d'inscription, d'activités etc.
         //Et du nb d'utilisateurs.
-        $statusName = ['Créée','Ouverte','Activité en cours','Cloturée','Passée','Annulée','Historisée'];
+        $statusName = ['Créée','Ouverte'];
         $statuses = [];
         foreach ($statusName as $name) {
             $status = new Status();
@@ -51,9 +51,9 @@ class AppFixtures extends Fixture
 
         $faker = Faker\Factory::create('fr_FR');
         $faker->seed(1337);
-        //On créé 15 participants avec noms et prénoms aléatoires en français"
+        //On créé 30 participants avec noms et prénoms aléatoires en français"
         $participants = array();
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $participants[$i] = new Participant();
             $participants[$i]->setEmail($faker->safeEmail);
             $participants[$i]->setLastName($faker->lastName);
@@ -120,8 +120,7 @@ class AppFixtures extends Fixture
             $activity->setNbRegistration(mt_rand(2, 25));
             $date1 = $faker->dateTimeBetween('-40days', '+40days');
 
-            $dateString = date_format($date1, 'Y-m-d');
-            //$date2 = $faker->dateTimeBetween('-40days', '+40days');
+            $dateString = date_format($date1, 'd-mY');
             $date2 = $faker->dateTimeInInterval($dateString, '-7days');
             if ($date1 > $date2) {
                 $activity->setStartDate($date1);
@@ -131,10 +130,13 @@ class AppFixtures extends Fixture
                 $activity->setRegistrationDeadline($date1);
             }
             $activity->setLocation($locations[mt_rand(0, 14)]);
-            // $activity->setLocation($this->mapService->geocodeAddress('mairie', $towns[$i]));
+
 
 
             $activity->setStatus($statuses[mt_rand(0, 6)]);
+
+
+
             $manager->persist($activity);
         }
 

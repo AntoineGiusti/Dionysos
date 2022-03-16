@@ -32,7 +32,7 @@ security:
             #Activation du système remember_me
             remember_me:
                 secret: '%kernel.secret%' #C'est utilisé pour "signer" la valeur du cookie "Remember me" et le paramètres kernel.secret provient en fait du fichier .env
-                lifetime: 60  #durée de vie du remember me en seconde Ici une min pour tester
+                lifetime: 604800  #durée de vie du remember me : une semaine
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -44,8 +44,9 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/profile, roles: ROLE_USER }
-        # - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }
+
 
 when@test:
     security:
