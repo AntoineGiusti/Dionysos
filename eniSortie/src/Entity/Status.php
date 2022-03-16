@@ -30,7 +30,7 @@ class Status
     private $activity;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $code;
 

@@ -39,7 +39,7 @@ class ParticipantController extends AbstractController
         $form->handleRequest($request);
         $password=$form->get('password')->getData();
 
-//        dd($form->isSubmitted());
+
         if ($form->isSubmitted() && $form->isValid())
 
          {
@@ -114,9 +114,8 @@ class ParticipantController extends AbstractController
         
     ]);
 
- }
-
-    // S'inscrire à une activité
+    }
+    // S'inscrire à une activite
     /**
      *  @Route("/suscribe/{id}", name="app_suscribe")
      */
