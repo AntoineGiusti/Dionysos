@@ -77,11 +77,14 @@
 
                     {% for activity in activity.participant %}
                         <tr>
+                           
                             <td>{{ activity.lastname }}</td>
-
-                            <td>{{ activity.firstname }}</td>
+                            <td>{{ activity.firstname }}</td> 
+                            <a href="{{ path('showDetailParticipant', {id:activity.id}) }}" alt="Afficher le profil">Afficher </a>
                         </tr>
-                    {% endfor %}
+                   
+                             
+                    {% endfor %}            
                     </tbody>
                     </thead>
                 </table>
@@ -90,10 +93,7 @@
     </div>
     </div>
     </div>
-    {# </div> #}
-    {# <div class = "butn-group">
-    <a href="{{ path('show_detail_activity',{"id":activity.id})}}">Détail de l'activité</a>
-    </div> bouton à récupérer pour l'écran principal des activités #}
+  
         {% include('footer.html.twig') %}
     {% endblock %}
 {% endblock %}
