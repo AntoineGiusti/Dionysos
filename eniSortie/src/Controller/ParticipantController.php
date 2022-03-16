@@ -39,7 +39,6 @@ class ParticipantController extends AbstractController
         $form->handleRequest($request);
         $password = $form->get('password')->getData();
 
-//        dd($form->isSubmitted());
         if ($form->isSubmitted() && $form->isValid()) {
 
             /** @var UploadedFile $photoFile */

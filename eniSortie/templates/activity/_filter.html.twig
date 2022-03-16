@@ -9,23 +9,25 @@
         <div class="card mb-4 mb-xl-0">
             <div class="card-header"><h3>Filtrer les sorties</h3></div>
             <div class="card-body">
-                <p>Le nom de la sortie contient : </p>
-                {{ form_row(form.q) }}
-                <p>Le campus : </p>
-                {{ form_row(form.campus) }}
-
-                {{ form_row(form.isOrganizer) }}
-
-                {{ form_row(form.isRegistered) }}
-
-                {{ form_row(form.isNotRegistered) }}
-
-                {{ form_row(form.passedActivity) }}
-
-                <p>Entre {{ form_row(form.date1) }} et {{ form_row(form.date2) }}</p>
-
-                <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            {{ form_row(form.q) }}
+                            {{ form_row(form.campus) }}
+                            {{ form_row(form.date1) }}  {{ form_row(form.date2) }}
+                        </div>
+                        <div class="col-sm-5">
+                            {{ form_row(form.isOrganizer) }}
+                            {{ form_row(form.isRegistered) }}
+                            {{ form_row(form.isNotRegistered) }}
+                            {{ form_row(form.passedActivity) }}</div>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary w-75">Rechercher</button>
+                        </div>
+                    </div>
                 </div>
+
+
+            </div>
 
         </div>
 
