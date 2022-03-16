@@ -2,7 +2,7 @@
 
 {% block title %}
     {{ parent() }}
-    New Activity{% endblock %}
+    Nouvelle activité{% endblock %}
 
 
 
@@ -10,9 +10,16 @@
     {% include('navbar.html.twig') %}
     {% block body %}
         <div class="container-xl px-4 mt-4">
-
             <hr class="mt-0 mb-4">
             <div class="row">
+                {#                Message flash de réussite#}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+
                 <div class="col-xl-4">
                     <img class="img-fluid" src="{{ asset ('img/team.jpg') }}" alt="Icon">
                 </div>
@@ -30,6 +37,9 @@
                             {{ form_row(activity.nbRegistration) }}
                             {{ form_row(activity.activityDescription) }}
                             {{ form_row(activity.location) }}
+                            {{ form_row(activity.status) }}
+{#                            {{ form_row(activity.campus) }}#}
+                            {{ form_row(activity._token) }}
                             
                             <div class="align-items-center">
                                 <button type="submit" class="btn btn-dark">Ajouter !</button>

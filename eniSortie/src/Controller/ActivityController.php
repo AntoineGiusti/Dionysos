@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Entity\Activity;
+use App\Entity\Status;
+use App\Entity\Campus;
 use App\Form\ActivityType;
 use App\Form\FilterSearchType;
 use App\Form\model\FilterSearch;
@@ -54,7 +56,14 @@ class ActivityController extends AbstractController
         $activity = new Activity();
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
-        $activity->setOrganizer($this->getUser());
+
+        //Détermine l'organisteur du site (User) et le campus organisateur (campus du User)
+        $organizer = $this->getUser();
+        $activity->setOrganizer($organizer);
+        $campus= $organizer->getCampus();
+        $activity->setCampus($campus);
+        ///////////////////////////////////////
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -62,14 +71,13 @@ class ActivityController extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Votre activité a été crée avec succès !');
             return $this->redirectToRoute('home');
-
-
         }
 
         return $this->render('activity/new.html.twig', [
-            //'activity' => $activity,
-            'activity'=>$form->createView() 
+            'activity'=>$form->createView()
+
         ]);
+
     }
 
     /**

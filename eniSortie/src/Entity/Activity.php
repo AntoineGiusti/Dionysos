@@ -22,23 +22,28 @@ class Activity
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Assert\notBlank(message="le nom de l'activité ne peut être vide")
+     * @Assert\NotBlank(message="le nom de l'activité ne peut être vide")
+     * @Assert\Length(min=5,max=255,
+     *     minMessage="Le nom de votre activité doit comporter au moins 5 caractères.",
+     *     maxMessage="Le nom de votre activité doit comporter au maximum 255 caractères.")
      * 
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThanOrEqual("now", message="La date de début d'activité doit être supérieur à la date du jour : {{ compared_value }}")
      */
     private $startDate;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $activityDuration;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\LessThan(propertyPath="startDate", message="La date de limite d'inscription doit être inférieur à la date du début de l'activité")
      */
     private $registrationDeadline;
 
@@ -49,6 +54,7 @@ class Activity
 
     /**
      * @ORM\Column(type="string", length=400, nullable=true)
+     * @Assert\Length (min=5, max=400)
      */
     private $activityDescription;
 
