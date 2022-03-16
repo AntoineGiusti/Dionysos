@@ -38,6 +38,9 @@ function setStatus(Activity $activity, $status, StatusRepository $statusReposito
             $closure = $activity->getRegistrationDeadline()->getTimestamp();
             // date de maintenant
             $nowDate =(new DateTime())->getTimestamp();
+            //date pour historisation, date de fin + 40jours
+            $durationForHist = 40;
+            $histoDate = date('d,m,Y',strtotime('+'.$durationForHist.'days'.$activityEnd->getTimestamp()));
             
             // si la date de maintenant est sup a la date de fin d'activity, l'activity est passée
             if($activityEnd < $nowDate)
@@ -53,6 +56,11 @@ function setStatus(Activity $activity, $status, StatusRepository $statusReposito
             else if($closure < $nowDate)
             {
                 $activity->setStatus($statusRepository->find(['code','PROG']));
+            }
+            // Si la date de fin de l'activité est sup a la date d'historisation (soit 40 jrs + tard), l'activity est historisée
+            else if($activityEnd > $histoDate)
+            {
+                $activity->setStatus($statusRepository->find(['code','HIST']));
             }
             // sinon le status est ouvert a l'inscription
             else
