@@ -87,7 +87,7 @@ class ActivityController extends AbstractController
             $em->persist($activity);
             $em->flush();
             $this->addFlash('success', 'Votre activité a été modifiée avec succès !');
-            return $this->redirectToRoute('app_activity_edit');
+            return $this->redirectToRoute('app_activity_edit', ['id' => $activity->getId()] );
         }
 
         return $this->render('activity/edit.html.twig', [

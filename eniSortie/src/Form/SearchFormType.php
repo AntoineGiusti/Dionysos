@@ -31,6 +31,7 @@ class SearchFormType extends AbstractType
                 ])
             ->add('campus', EntityType::class, [
                 'label' => 'Campus',
+                'placeholder'=>'Campus',
                 'required'=>false,
                 //Classe à utiliser
                 'class'=> Campus::class,
