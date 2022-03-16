@@ -39,7 +39,10 @@ class ParticipantController extends AbstractController
         $form->handleRequest($request);
         $password = $form->get('password')->getData();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
+        if ($form->isSubmitted() && $form->isValid())
+
+         {
 
             /** @var UploadedFile $photoFile */
             //Upload de l'image
@@ -78,7 +81,7 @@ class ParticipantController extends AbstractController
 
             $this->addFlash('success', 'Votre profil a été modifié avec succès !');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('update_participant');
 
         }
         return $this->renderForm('participant/updateParticipant.html.twig', [
@@ -107,14 +110,9 @@ class ParticipantController extends AbstractController
     {
         return $this->render('participant/showDetailParticipant.html.twig', [
             'participant' => $participant
-
-
         ]);
-
     }
-
-    // S'inscrire à une activité
-
+    // S'inscrire à une activite
     /**
      * @Route("/suscribe/{id}", name="app_suscribe")
      */
@@ -149,7 +147,6 @@ class ParticipantController extends AbstractController
             return $this->redirectToRoute('home');
         }
         return $this->redirectToRoute('home');
-
     }
     /**
      *  @Route("/unsuscribe/{id}", name="app_unSuscribe")

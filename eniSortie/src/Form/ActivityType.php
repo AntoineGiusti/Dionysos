@@ -22,6 +22,7 @@ class ActivityType extends AbstractType
         $builder
             ->add('name', TextType::class,[
                 'label'=>'Nom',
+                'required'=>false
             ])
             ->add('startDate', DateTimeType::class,[
                 'label'=>'Date de l\'activité',
