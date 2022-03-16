@@ -34,27 +34,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-                <a href="{{ path('home') }}" class="nav-item nav-link active">Accueil</a>
-                {# <a href="about.html" class="nav-item nav-link">About</a> #}
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Campus</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                        <a href="property-list.html" class="dropdown-item">Rennes</a>
-                        <a href="property-list.html" class="dropdown-item">Saint Herblain</a>
-                        <a href="property-list.html" class="dropdown-item">Niort</a>
-                    </div>
-                </div>
-
+                <a href="{{ path('home') }}" class="nav-item nav-link">Accueil</a>
             </div>
-            <a href="{{ path('new_activity') }}" class="btn btn-primary px-3 d-none d-lg-flex">Ajouter activité</a>
-
             {% if app.user %}
-                <a href="{{ path('update_participant') }}" class="btn btn-info px-3 mx-3 d-none d-lg-flex" >Mon profil</a>
-            {% endif %}
-
-
-            {% if app.user %}
-                    <a href="{{ path('app_logout') }}" class="btn btn-secondary px-3 mx-3 d-none d-lg-flex" >Déconnexion</a>
+                <a href="{{ path('update_participant') }}" class="nav-item nav-link" >Mon profil</a>
+                <a href="{{ path('app_logout') }}" class="nav-item nav-link" >Déconnexion</a>
             {% endif %}
 
 

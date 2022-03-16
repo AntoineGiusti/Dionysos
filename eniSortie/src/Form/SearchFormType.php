@@ -22,7 +22,7 @@ class SearchFormType extends AbstractType
         $builder
             //Barre de recherche
             ->add('q', TextType::class, [
-                'label'=>false,
+                'label'=>'Le nom de la sortie contient',
                  'required'=>false,
                 'empty_data' => '',
                  'attr'=>[
@@ -30,7 +30,7 @@ class SearchFormType extends AbstractType
                  ]
                 ])
             ->add('campus', EntityType::class, [
-                'label' => false,
+                'label' => 'Campus',
                 'required'=>false,
                 //Classe à utiliser
                 'class'=> Campus::class,
@@ -57,12 +57,12 @@ class SearchFormType extends AbstractType
             ->add('date1', DateType::class, [
                 'widget'=>'single_text',
                 'required'=>false,
-                'label'=>false,
+                'label'=>'Entre le ',
             ])
             ->add('date2', DateType::class, [
                 'widget'=>'single_text',
                 'required'=>false,
-                'label'=>false,
+                'label'=>'et le ',
 
             ])
         ;
