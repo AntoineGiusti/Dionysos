@@ -8,17 +8,6 @@
 
                     <td>
 
-{#                        {%  if  app.user.id != activity.organizer.id %}#}
-{#                            <a class="form-check-input btn-info" name="registed" href="{{path ('app_isRegisted', {id:activity.id})}}" type="checkbox" id="flexSwitchCheckDefault">s'inscrire</a>#}
-{#                        {%  endif %}#}
-                        {%  if app.user %}
-                        {%  if  app.user.id != activity.organizer.id %}
-                            <a class="form-check-input btn-success" name="suscribe" href="{{path ('app_suscribe', {id:activity.id})}},">s'inscrire</a><br>
-                        {%  endif %}
-                        {% if app.user.id != activity.organizer.id %}
-                        <a class="form-check-input btn-danger" name="unSuscribe" href="{{path ('app_unSuscribe', {id:activity.id})}}">se desinscrire</a>
-                        {% endif %}
-                        {%  endif %}
 
                     </td>
                     <td>{{ activity.organizer.firstname }} {{ activity.organizer.lastname }}</td>
@@ -26,11 +15,20 @@
                     <td>
                         {%  if app.user %}
                             <a href="{{ path('show_detail_activity', {id:activity.id}) }}" alt="Afficher la sortie">Afficher </a>
+
+                            {%  if app.user %}
+                                {%  if  app.user.id != activity.organizer.id %}
+                                    <a class="form-check-input btn-success" name="suscribe" href="{{path ('app_suscribe', {id:activity.id})}},">s'inscrire</a><br>
+                                {%  endif %}
+                                {% if app.user.id != activity.organizer.id %}
+                                    <a class="form-check-input btn-danger" name="unSuscribe" href="{{path ('app_unSuscribe', {id:activity.id})}}">se desinscrire</a>
+                                {% endif %}
+                            {%  endif %}
+
                             <!--Modifier, Publier, Supprimer la sortie si Id User = Id Organisateur-->
                             {%  if  app.user.id == activity.organizer.id %}
                                 <a href="{{ path('app_activity_edit', {id:activity.id}) }}" alt="Modifier la sortie">Modifier </a>
-                                <a href="{{ path('app_activity_delete', {id:activity.id}) }}" alt="Supprimer la sortie">Supprimer </a>
-
+                                <a href="{{ path('app_activity_cancel', {id:activity.id}) }}" alt="Annuler la sortie">Annuler </a>
                             {%  endif %}
                         {%  endif  %}
                     </td>

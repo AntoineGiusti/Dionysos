@@ -81,6 +81,7 @@ class ActivityRepository extends ServiceEntityRepository
             ->innerJoin('a.campus', 'c')
             ->leftJoin('a.organizer', 'o');
 
+        //Barre de recherche
         if (!empty($search->getQ())) {
             $query
                 //Le nom de notre activité soit comme le paramètre q
@@ -134,7 +135,7 @@ class ActivityRepository extends ServiceEntityRepository
                 $query,
                 $search->page,
                 //Nombre max d'activités affichés lors de la recherche
-                20,
+                5,
             );
         }
     }
