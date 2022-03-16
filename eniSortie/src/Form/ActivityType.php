@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ActivityType extends AbstractType
 {
@@ -34,11 +34,11 @@ class ActivityType extends AbstractType
             ->add('activityDuration',IntegerType::class,[
                 'label'=>'Durée de l\'activité',
             ])
-            ->add('registrationDeadline', DateTimeType::class,[
+            ->add('registrationDeadline', DateType::class,[
                 'label'=>'Date limite d\'inscription',
                 'placeholder' => [
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
-                    'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde',
+                   
                 ]
             ])
             ->add('nbRegistration', IntegerType::class,[
@@ -56,14 +56,18 @@ class ActivityType extends AbstractType
             ->add('status', EntityType::class,
             [
                 'label'=>'Etat',
+                'required'=>false,
                 'class'=>Status::class,
                 'choice_label'=>'wording'
+                
             ])
 
             ->add('campus' , EntityType::class,[
                 'label'=>'Campus',
+                'required'=>false,
                 'class'=>Campus::class,
                 'choice_label'=>'name'
+                
             ]);
     }
 
