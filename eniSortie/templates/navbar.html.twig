@@ -34,11 +34,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-                <a href="{{ path('home') }}" class="nav-item nav-link">Accueil</a>
+                <a href="{{ path('home') }}" class="nav-item nav-link ">Accueil</a>
+
             </div>
+            <a href="{{ path('new_activity') }}" class="btn btn-primary px-3 d-none d-lg-flex">Ajouter activité</a>
+
             {% if app.user %}
-                <a href="{{ path('update_participant') }}" class="nav-item nav-link" >Mon profil</a>
-                <a href="{{ path('app_logout') }}" class="nav-item nav-link" >Déconnexion</a>
+                <a href="{{ path('update_participant') }}" class="nav-item nav-link " >Mon profil</a>
+            {% endif %}
+
+
+            {% if app.user %}
+                    <a href="{{ path('app_logout') }}" class="nav-item nav-link " >Déconnexion</a>
             {% endif %}
 
 

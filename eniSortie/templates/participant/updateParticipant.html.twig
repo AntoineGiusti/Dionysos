@@ -9,93 +9,99 @@
     {% block body %}
 
 
-<div class="container-xl px-4 mt-4">
+        <div class="container-xl px-4 mt-4">
+            <hr class="mt-0 mb-4">
+            <div class="row">
+                {#                Message flash de réussite #}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <div class="col-xl-4">
 
-<hr class="mt-0 mb-4">
-<div class="row">
-    <div class="col-xl-4">
+                    {{ form_start(formulaire) }}
+                    <!-- Profile picture card-->
+                    <div class="card mb-4 mb-xl-0">
+                        <div class="card-header">Photo de profil</div>
+                        <div class="card-body text-center">
+                            <!-- Profile picture image-->
+                            {% if participant.photoFilename is defined %}
+                                <img class="img-thumbnail " alt="photo de profil"
+                                     src="{{ asset('uploads/') }}{{ participant.photoFilename }}">
+                            {% else %}
 
-        {{ form_start(formulaire) }}
-        <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0">
-            <div class="card-header">Photo de profil</div>
-            <div class="card-body text-center">
-                <!-- Profile picture image-->
-                {% if participant.photoFilename is defined %}
-                    <img class="img-thumbnail " alt="photo de profil" src="{{ asset('uploads/') }}{{ participant.photoFilename }}" >
-                {% else %}
+                            {% endif %}
+                            <!-- Profile picture help block-->
+                            <div class="small font-italic text-muted mb-4">JPG or PNG</div>
+                            <!-- Profile picture upload button-->
 
-                {% endif %}
-                <!-- Profile picture help block-->
-                <div class="small font-italic text-muted mb-4">JPG or PNG</div>
-                <!-- Profile picture upload button-->
+                            {{ form_row(formulaire.photo,{'label':false}) }}
 
-                {{ form_row(formulaire.photo,{'label':false}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8">
+                    <!-- Account details card-->
+                    <div class="card mb-4">
+                        <div class="card-header">Mon profil</div>
+                        <div class="card-body">
 
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3">
+                                <!-- Prénom-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1">Prénom</label>
+                                    {{ form_row(formulaire.firstname, {'label':false}) }}
+                                </div>
+                                <!-- Nom -->
+                                <div class="col-md-6">
+                                    <label class="small mb-1">Nom</label>
+                                    {{ form_row(formulaire.lastname, {'label':false}) }}
+                                </div>
+                            </div>
+
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3">
+                                <!-- Numéro de téléphone-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1">Téléphone</label>
+                                    {{ form_row(formulaire.phoneNumber, {'label':false}) }}
+                                </div>
+                                <!-- Email -->
+                                <div class="col-md-6">
+                                    <label class="small mb-1">Email</label>
+                                    {{ form_row(formulaire.email, {'label':false}) }}
+                                </div>
+                            </div>
+
+                            <!-- Form Row        -->
+                            <div class="row gx-3 mb-3">
+                                <!-- Nouveau mot de passe-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1">Nouveau mot de passe</label>
+                                    {{ form_row(formulaire.password.first) }}
+                                </div>
+
+
+                                <!-- Confirmation nouveau mot de passe-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1">Confirmation nouveau mot de passe</label>
+                                    {{ form_row(formulaire.password.second) }}
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="submit">Modifier mon profil</button>
+                        {{ form_end(formulaire) }}
+
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-xl-8">
-        <!-- Account details card-->
-        <div class="card mb-4">
-            <div class="card-header">Mon profil</div>
-            <div class="card-body">
-
-                    <!-- Form Row-->
-                    <div class="row gx-3 mb-3">
-                        <!-- Prénom-->
-                        <div class="col-md-6">
-                            <label class="small mb-1">Prénom</label>
-                            {{ form_row(formulaire.firstname, {'label':false}) }}
-                        </div>
-                        <!-- Nom -->
-                        <div class="col-md-6">
-                            <label class="small mb-1">Nom</label>
-                            {{ form_row(formulaire.lastname, {'label':false}) }}
-                        </div>
-                    </div>
-
-                    <!-- Form Row-->
-                    <div class="row gx-3 mb-3">
-                        <!-- Numéro de téléphone-->
-                        <div class="col-md-6">
-                            <label class="small mb-1" >Téléphone</label>
-                            {{ form_row(formulaire.phoneNumber, {'label':false}) }}
-                        </div>
-                        <!-- Email -->
-                        <div class="col-md-6">
-                            <label class="small mb-1" >Email</label>
-                            {{ form_row(formulaire.email, {'label':false}) }}
-                        </div>
-                    </div>
-
-                    <!-- Form Row        -->
-                    <div class="row gx-3 mb-3">
-                        <!-- Nouveau mot de passe-->
-                        <div class="col-md-6">
-                            <label class="small mb-1">Nouveau mot de passe</label>
-                            {{ form_row(formulaire.password.first) }}
-                        </div>
-
-
-                        <!-- Confirmation nouveau mot de passe-->
-                        <div class="col-md-6">
-                            <label class="small mb-1">Confirmation nouveau mot de passe</label>
-                            {{ form_row(formulaire.password.second) }}
-                        </div>
-                    </div>
-
-
-                    </div>
-                    <!-- Save changes button-->
-                    <button class="btn btn-primary" type="submit">Modifier mon profil</button>
-            {{form_end(formulaire)}}
-
         </div>
-        </div>
-    </div>
-</div>
-</div>
 
         {% include('footer.html.twig') %}
 
