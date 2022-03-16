@@ -118,37 +118,14 @@ class ParticipantController extends AbstractController
     }
     // S'inscrire à une activite
     /**
-<<<<<<< HEAD
-     *  @Route("/suscribe/{id}", name="app_suscribe")     *  
-     */
-
-    public function suscribe($id ,ActivityRepository $activityRepository,EntityManagerInterface $em, ActivityServices $activityServices, StatusRepository $statusRepository)
-=======
      * @Route("/suscribe/{id}", name="app_suscribe")
      */
 
     public function suscribe($id, ActivityRepository $activityRepository, EntityManagerInterface $em, StatusRepository $statusRepository)
->>>>>>> fcc0d782a7c9a3449436c6da74dd1a810af8efdc
     {
-        $activityServices->resetStatus();
+        
 
         $activity = $activityRepository->find($id);
-<<<<<<< HEAD
-        
-        $activity->getParticipant()->count();
-         
-        $activity->addParticipant($this->getUser());        
-
-            
-        $em->persist($activity);
-        $em ->flush();
-    
-        return $this->redirectToRoute('home');
-    }
-        /**
-         *  @Route("/unsuscribe/{id}", name="app_unSuscribe")
-         */
-=======
 
         $nbParticipant = $activity->getParticipant()->count();
 
@@ -163,7 +140,6 @@ class ParticipantController extends AbstractController
             $dateNow = new \DateTime('now');
             $open = $activity->getStatus('Ouverte');
 
->>>>>>> fcc0d782a7c9a3449436c6da74dd1a810af8efdc
 
             if ($nbParticipant <= $activity->getNbRegistration() && $dateNow > $activity->getRegistrationDeadline() && $open) {
 
