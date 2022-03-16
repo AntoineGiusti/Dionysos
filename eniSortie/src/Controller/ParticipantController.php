@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Activity;
 use App\Entity\Participant;
+use App\Entity\Status;
 use App\Form\ParticipantType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -11,6 +12,7 @@ use App\Repository\ActivityRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\StatusRepository;
 use App\Service\ActivityServices;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -25,6 +27,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ParticipantController extends AbstractController
 {
+
+
     /**
      * @Route("/updateParticipant", name="update_participant")
      */
@@ -118,27 +122,20 @@ class ParticipantController extends AbstractController
 
     // S'inscrire à une activité
     /**
-     *  @Route("/suscribe/{id}", name="app_suscribe")
+     *  @Route("/suscribe/{id}", name="app_suscribe")     *  
      */
 
-    public function suscribe($id, ActivityRepository $activityRepository,EntityManagerInterface $em, StatusRepository $statusRepository)
+    public function suscribe($id ,ActivityRepository $activityRepository,EntityManagerInterface $em, ActivityServices $activityServices, StatusRepository $statusRepository)
     {
+        $activityServices->resetStatus();
 
         $activity = $activityRepository->find($id);
         
-        $nbParticipant = $activity->getParticipant()->count();
+        $activity->getParticipant()->count();
+         
+        $activity->addParticipant($this->getUser());        
 
-        //a gérer mieux en BDD avec la gestion des Status !
-        $dateNow = new \DateTime();      
-        //'code' => 'OPEN' appelle un objet dans une nouvelle colonne de l'entité status.  
-        $status = $statusRepository->findOneBy(['code' => 'OPEN']);         
-      
-        if($nbParticipant <= $activity->getNbRegistration() && $activity->getStatus() == $status){
             
-            $activity->addParticipant($this->getUser()); 
-        }
-
-
         $em->persist($activity);
         $em ->flush();
     

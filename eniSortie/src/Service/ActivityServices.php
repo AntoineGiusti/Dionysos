@@ -3,14 +3,33 @@
 namespace App\Service;
 
 use App\Entity\Activity;
+use App\Entity\Status;
+use App\Repository\ActivityRepository;
 use App\Repository\StatusRepository;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ActivityServices
+
 {
+   
+    private ActivityRepository $activityRepository;
+    private StatusRepository $statusRepository;
+    private EntityManagerInterface $em;
+
+public function __construct(ActivityRepository $activityRepository, StatusRepository $statusRepository, EntityManagerInterface $em)
+{
+   
+    $this->activityRepository = $activityRepository;
+    $this->statusRepository= $statusRepository;
+    $this->em = $em;
+    
+}
+
+
         //fonction de service qui permet de gerer l'update en fonction de l'etat.
 
-function isUdatable(Activity $activity, $participant)
+public function isUdatable(Activity $activity, $participant)
         // Si l'activity est passée, annulée ou que les inscription sont closes, on ne peut plus la modifier
     {
         $statusPast = in_array($activity->getStatus()->getCode(),['CLOT', 'PAST', 'ANNU']);
@@ -19,56 +38,45 @@ function isUdatable(Activity $activity, $participant)
 
     }
         //fonction de service qui permet de mettre un status sur une activity en fonction des temps
-function setStatus(Activity $activity, $status, StatusRepository $statusRepository  )
-    {
-        // Si les status sont creation ou annulé, le status sera inactif
-        if($status === ['code', 'CREA'] || $status === ['code','ANNU']){
-            $activity->setStatus($statusRepository->find($status));        
-        }else{
-            // gestion du fuseau horaire
-            date_default_timezone_set('Europe/Paris');
+    public function resetStatus()
+    {   
 
-            //variables de gestions des temps selons les dates d'activity:
+       
+        $activity = $this->activityRepository->findAll();
+        $status = $this->statusRepository->findAll();
+        foreach($activity as $a){
+           $now = new \DateTime();
+           $now2 = clone $now;
+           $histoDate = $now2->modify('-1 month');
 
-            // date de debut
-            $activityStart = $activity->getStartDate()->getTimestamp();
-            //date de fin
-            $activityEnd = $activityStart +($activity->getActivityDuration() * 1000 * 60);
-            // date de cloture d'inscription
-            $closure = $activity->getRegistrationDeadline()->getTimestamp();
-            // date de maintenant
-            $nowDate =(new DateTime())->getTimestamp();
-            //date pour historisation, date de fin + 40jours
-            $durationForHist = 40;
-            $histoDate = date('d,m,Y',strtotime('+'.$durationForHist.'days'.$activityEnd->getTimestamp()));
-            
-            // si la date de maintenant est sup a la date de fin d'activity, l'activity est passée
-            if($activityEnd < $nowDate)
-            {
-                $activity->setStatus($statusRepository->find(['code', 'PAST']));
-            }
-            // si la date de maintenant est sup a la date de debut mais inf a la date de fin, l'inscription est cloturée
-            else if($activityStart < $nowDate && $activityEnd > $nowDate)
-            {
-                $activity->setStatus($statusRepository->find(['code', 'CLOT']));
-            }
-            // si la date de maintenant est sup a la date de cloture des inscription, l'activity est en cours et non rejoignable
-            else if($closure < $nowDate)
-            {
-                $activity->setStatus($statusRepository->find(['code','PROG']));
-            }
-            // Si la date de fin de l'activité est sup a la date d'historisation (soit 40 jrs + tard), l'activity est historisée
-            else if($activityEnd > $histoDate)
-            {
-                $activity->setStatus($statusRepository->find(['code','HIST']));
-            }
-            // sinon le status est ouvert a l'inscription
-            else
-            {
-                $activity->setStatus($statusRepository->find(['code','OPEN']));
-            }
+           if($a->getStartDate()<$histoDate)
+           {
+               $a->setStatus($status[6]);
+               $this->em->persist($a);
 
-        }
+           }elseif($a->getStatus()->getWording() != 'Passée'
+           && $a->getStartDate() > $histoDate
+           && date_add(clone $a->getStartDate(), date_interval_create_from_date_string($a->getActivityDuration().' minutes')) < $now)
+           {
+               $a->setStatus($status[4]);
+               $this->em->persist($a);
+
+           }elseif($a->getStatus()->getWording() != 'Cloturée'
+           && $a->getRegistrationDeadline() < $now
+           && $a->getStartDate()> $now)
+           {
+               $a->setStatus($status[2]);
+               $this->em->persist($a);
+           }elseif($a->getStatus()->getWording() != 'Activité en cours' 
+           && $a->getStatus()->getWording() != 'Annulée'
+           && date_add(clone $a->getStartDate(),date_interval_create_from_date_string($a->getActivityDuration().' minutes'))> $now)
+           {
+               $a->setStatus($status[3]);
+               $this->em->persist($a);
+           }
+
+        } $this->em->flush();
+       
     }
 
 
