@@ -53,14 +53,6 @@ class ActivityType extends AbstractType
                 'class'=>Location::class,
                 'choice_label'=>'name'])
 
-            ->add('status', EntityType::class,
-            [
-                'label'=>'Etat',
-                'required'=>false,
-                'class'=>Status::class,
-                'choice_label'=>'wording'
-                
-            ])
 
             ->add('campus' , EntityType::class,[
                 'label'=>'Campus',
