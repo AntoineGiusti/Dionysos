@@ -81,7 +81,7 @@ class ParticipantController extends AbstractController
 
             $this->addFlash('success', 'Votre profil a été modifié avec succès !');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('update_participant');
 
         }
         return $this->renderForm('participant/updateParticipant.html.twig', [
@@ -147,7 +147,7 @@ class ParticipantController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-
+        return $this->redirectToRoute('home');
     }
     /**
      *  @Route("/unsuscribe/{id}", name="app_unSuscribe")
