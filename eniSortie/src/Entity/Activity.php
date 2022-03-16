@@ -22,7 +22,7 @@ class Activity
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Assert\notBlank(message="le nom de l'activité ne peut être vide")
+     * @Assert\NotBlank(message="le nom de l'activité ne peut être vide")
      * 
      */
     private $name;
