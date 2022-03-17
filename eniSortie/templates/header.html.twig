@@ -4,7 +4,15 @@
         <div class="col-md-6 p-5 mt-lg-5">
             <h1 class="display-5 animated fadeIn mb-4">Sortir avec l'  <span class="text-primary">ENI</span>
                 <p>Les sorties du BDE</p></h1>
-            <p class="animated fadeIn mb-4 pb-2">Le bureau des etudiants de l'ENI vous propose des sorties au plus pres de ses campus</p>
+            <p class="animated fadeIn mb-4 pb-2">
+                <!--Message personnalisé à l'utilisateur quand il est co'-->
+                {% if app.user %}
+            <div>
+                <h4>Bonjour {{ app.user.firstname }}</h4>
+            </div>
+            {% endif %}
+            <!-- Fin du message personnalisé-->
+                Le bureau des etudiants de l'ENI vous propose des sorties au plus pres de ses campus</p>
         </div>
         <div class="col-md-6 animated fadeIn">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
