@@ -135,7 +135,7 @@ class ActivityRepository extends ServiceEntityRepository
                 $query,
                 $search->page,
                 //Nombre max d'activités affichés lors de la recherche
-                5,
+                10,
             );
         }
     }

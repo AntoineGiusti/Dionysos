@@ -67,7 +67,10 @@ class ActivityController extends AbstractController
         $activity ;
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
-        $activity->setOrganizer($this->getUser());
+        $organizer = $this->getUser();
+        $activity->setOrganizer($organizer);
+        $campus= $organizer->getCampus();
+        $activity->setCampus($campus);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
