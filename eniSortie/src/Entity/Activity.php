@@ -26,7 +26,6 @@ class Activity
      * @Assert\Length(min=5,max=255,
      *     minMessage="Le nom de votre activité doit comporter au moins 5 caractères.",
      *     maxMessage="Le nom de votre activité doit comporter au maximum 255 caractères.")
-     *
      */
     private $name;
 

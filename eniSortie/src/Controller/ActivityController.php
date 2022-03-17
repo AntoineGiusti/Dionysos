@@ -64,7 +64,8 @@ class ActivityController extends AbstractController
      */
     public function edit(Request $request, Activity $activity): Response
     {
-        $activity ;
+        if($this->getUser() === $activity->getOrganizer()) {
+            $activity ;
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
         $organizer = $this->getUser();
@@ -72,18 +73,23 @@ class ActivityController extends AbstractController
         $campus= $organizer->getCampus();
         $activity->setCampus($campus);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($activity);
-            $em->flush();
-            $this->addFlash('success', 'Votre activité a été modifiée avec succès !');
-            return $this->redirectToRoute('app_activity_edit', ['id' => $activity->getId()] );
-        }
 
-        return $this->render('activity/edit.html.twig', [
-            //'activity' => $activity,
-            'activity'=>$form->createView()
-        ]);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($activity);
+                $em->flush();
+                $this->addFlash('success', 'Votre activité a été modifiée avec succès !');
+                return $this->redirectToRoute('app_activity_edit', ['id' => $activity->getId()]);
+            }
+
+            return $this->render('activity/edit.html.twig', [
+                //'activity' => $activity,
+                'activity' => $form->createView()
+            ]);
+        }
+        else{
+            return $this->redirectToRoute('home');
+        }
     }
 
     /**
@@ -91,8 +97,6 @@ class ActivityController extends AbstractController
      */
     public function cancel(Request $request, Activity $activity, EntityManagerInterface $em): Response
     {
-         
-
         if ($request->get('motif')) {
             $activity->setActivityDescription($request->get('motif'));
             // ligne ci dessous a modifier quand on aura geré les status. codeActivity est une colonne en plus dans la BDD pour ne pas
