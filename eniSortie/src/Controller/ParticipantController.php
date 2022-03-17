@@ -120,39 +120,18 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/suscribe/{id}", name="app_suscribe")
      */
-
     public function suscribe($id, ActivityRepository $activityRepository, EntityManagerInterface $em, StatusRepository $statusRepository)
     {
-        
-
         $activity = $activityRepository->find($id);
-
         $nbParticipant = $activity->getParticipant()->count();
-
+        $activity->addParticipant($this->getUser());
         //a gérer mieux en BDD avec la gestion des Status !
-
-        $dateNow = new \DateTime();
-        //'code' => 'OPEN' appelle un objet dans une nouvelle colonne de l'entité status.
-        $status = $statusRepository->findOneBy(['code' => 'OPEN']);
-
-        if ($nbParticipant <= $activity->getNbRegistration() && $activity->getStatus() == $status) {
-
-            $dateNow = new \DateTime('now');
-            $open = $activity->getStatus('Ouverte');
-
-
-            if ($nbParticipant <= $activity->getNbRegistration() && $dateNow > $activity->getRegistrationDeadline() && $open) {
-
-                $activity->addParticipant($this->getUser());
-            }
-
-            $em->persist($activity);
-            $em->flush();
-
-            return $this->redirectToRoute('home');
-        }
+        $em->persist($activity);
+        $this->addFlash('success', 'Vous êtes bien inscrit  à l\'activité !');
+        $em->flush();
         return $this->redirectToRoute('home');
     }
+
     /**
      *  @Route("/unsuscribe/{id}", name="app_unSuscribe")
      */
@@ -166,6 +145,7 @@ class ParticipantController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+
 
 
 
