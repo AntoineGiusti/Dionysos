@@ -35,7 +35,7 @@ class ActivityController extends AbstractController
     {
         // Je vais récupérer l'ensemble des activités
         //La méthode findSearch() qui peremet de récupérer les produits liés à une recherche
-        $activityServices->resetStatus();
+//        $activityServices->resetStatus();
         $data=new SearchData();
         //Définir page avec 1 par défaut
         $data->page=$request->get('page', 1);
