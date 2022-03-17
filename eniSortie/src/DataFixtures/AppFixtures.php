@@ -120,7 +120,9 @@ class AppFixtures extends Fixture
             $activity->setNbRegistration(mt_rand(2, 25));
             $date1 = $faker->dateTimeBetween('-40days', '+40days');
 
-            $dateString = date_format($date1, 'd-mY');
+
+
+            $dateString = date_format($date1, 'd-m-Y');
             $date2 = $faker->dateTimeInInterval($dateString, '-7days');
             if ($date1 > $date2) {
                 $activity->setStartDate($date1);
@@ -131,9 +133,7 @@ class AppFixtures extends Fixture
             }
             $activity->setLocation($locations[mt_rand(0, 14)]);
 
-
-
-            $activity->setStatus($statuses[mt_rand(0, 6)]);
+            $activity->setStatus($statuses[mt_rand(0, 1)]);
 
 
 
