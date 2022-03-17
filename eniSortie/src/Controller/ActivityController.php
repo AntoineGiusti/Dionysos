@@ -26,29 +26,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ActivityController extends AbstractController
 {
-
-
-    /**
-     * @Route("/", name="home")
-     */
-    public function index(ActivityServices $activityServices, ActivityRepository $activityRepository, Request $request): Response
-    {
-        // Je vais récupérer l'ensemble des activités
-        //La méthode findSearch() qui peremet de récupérer les produits liés à une recherche
-//        $activityServices->resetStatus();
-        $data=new SearchData();
-        //Définir page avec 1 par défaut
-        $data->page=$request->get('page', 1);
-        $form= $this->createForm(SearchFormType::class, $data);
-        $form->handleRequest($request);
-
-        $activities = $activityRepository->findSearch($data);
-        return $this->render('index.html.twig',[
-            'activities'=> $activities,
-            'form'=>$form->createView()
-    ]);
-    }
-
     /**
      * @Route("/new", name="new_activity")
      */
