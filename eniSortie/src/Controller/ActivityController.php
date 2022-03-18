@@ -97,20 +97,24 @@ class ActivityController extends AbstractController
      */
     public function cancel(Request $request, Activity $activity, EntityManagerInterface $em): Response
     {
-        if ($request->get('motif')) {
-            $activity->setActivityDescription($request->get('motif'));
-            // ligne ci dessous a modifier quand on aura geré les status. codeActivity est une colonne en plus dans la BDD pour ne pas
-            //Travailler avec l'ID ou avec le libelle
-            // $activity->setStatus($statusRepository->findOneBy(array('codeActivity' => 'ANNU')));
-            $em->persist($activity);
-            $em->flush();
-            $this->addFlash('success', 'Votre activité a été annulée avec succès !');
+        if($this->getUser() === $activity->getOrganizer()) {
+            if ($request->get('motif')) {
+                $activity->setActivityDescription($request->get('motif'));
+                // ligne ci dessous a modifier quand on aura geré les status. codeActivity est une colonne en plus dans la BDD pour ne pas
+                //Travailler avec l'ID ou avec le libelle
+                // $activity->setStatus($statusRepository->findOneBy(array('codeActivity' => 'ANNU')));
+                $em->persist($activity);
+                $em->flush();
+                $this->addFlash('success', 'Votre activité a été annulée avec succès !');
+                return $this->redirectToRoute('home');
+               }
+            return $this->render('activity/_cancel.html.twig',[
+                'activity' => $activity
+          ]);
+        }
+        else{
             return $this->redirectToRoute('home');
-           }
-
-        return $this->render('activity/_cancel.html.twig',[
-            'activity' => $activity                 
-         ]);
+        }
      }
 
        /**

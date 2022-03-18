@@ -11,7 +11,7 @@
 
     <td>
         {% if app.user %}
-            <a href="{{ path('show_detail_activity', {id:activity.id}) }}" alt="Afficher la sortie">Afficher </a>
+            <a href="{{ path('show_detail_activity', {id:activity.id}) }}" alt="Afficher la sortie">Afficher </a><br>
 
             <!--S'inscrire et de désinscrire d'une activité -->
             {% if app.user %}
@@ -19,14 +19,14 @@
                     <a name="suscribe" href="{{ path ('app_suscribe', {id:activity.id}) }},">S'inscrire</a><br>
                 {% endif %}
                 {% if app.user.id != activity.organizer.id %}
-                    <a name="unSuscribe" href="{{ path ('app_unSuscribe', {id:activity.id}) }}">Se desinscrire</a>
+                    <a name="unSuscribe" href="{{ path ('app_unSuscribe', {id:activity.id}) }}">Se desinscrire</a><br>
                 {% endif %}
             {% endif %}
 
             <!--Modifier, Publier, Supprimer la sortie si Id User = Id Organisateur-->
             {% if  app.user.id == activity.organizer.id %}
-                <a href="{{ path('app_activity_edit', {id:activity.id}) }}" alt="Modifier la sortie">Modifier </a>
-                <a href="{{ path('app_activity_cancel', {id:activity.id}) }}" alt="Annuler la sortie">Annuler </a>
+                <a href="{{ path('app_activity_edit', {id:activity.id}) }}" alt="Modifier la sortie">Modifier </a><br>
+                <a href="{{ path('app_activity_cancel', {id:activity.id}) }}" alt="Annuler la sortie">Annuler </a><br>
             {% endif %}
         {% endif %}
     </td>
